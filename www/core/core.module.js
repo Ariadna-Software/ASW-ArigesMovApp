@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('starter.core', [
+    angular.module('agsMovApp.core', [
         'blocks.router'
     ]);
 })();

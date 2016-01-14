@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('starter.core')
+        .module('agsMovApp.core')
         .run(appRun);
 
     function appRun($ionicPlatform) {

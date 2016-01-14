@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('starter.chat')
+        .module('agsMovApp.chat')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];

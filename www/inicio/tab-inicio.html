@@ -1,0 +1,42 @@
+<ion-view view-title="AiGesMov - (c) Ariadna Software S.L.">
+    <ion-content class="padding">
+        <div class="list card">
+            <div class="item item-image padding">
+                <img src="img/bacchus.png">
+            </div>
+        </div>
+        <div class="list card" ng-hide="logged">
+            <div class="item item-divider item-assertive">
+                <i class="icon ion-locked"></i> Identificacion
+            </div>
+            <label class="item item-input">
+                <input type="text" placeholder="Usuario">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Contraseña">
+            </label>
+            <div class="item item-body">
+                <div class="text-center">
+                    <button class="button" ng-click="login()">
+                        <i class="icon ion-log-in"></i> Entrar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="list card"  ng-show="logged">
+            <div class="item item-divider item-balanced"><i class="icon ion-unlocked"></i> Usuario actual</div>
+            <div class="item item-avatar">
+                <img src="img/adam.jpg">
+                <h2>Pedro Martinez</h2>
+                <p>12/01/2016 15:00:00</p>
+            </div>
+            <div class="item item-body text-center">
+                <div>
+                    <button class="button" ng-click="logout()">
+                        <i class="icon ion-log-out"></i> Cerrar sesión actual
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

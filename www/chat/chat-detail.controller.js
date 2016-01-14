@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('starter.chat')
+    angular.module('agsMovApp.chat')
     .controller('ChatDetailCtrl', ChatDetailCtrl);
 
     ChatDetailCtrl.$inject = ['$scope', '$stateParams', 'Chats'];

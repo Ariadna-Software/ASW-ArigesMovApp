@@ -1,23 +1,24 @@
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'agsMovApp' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
+// 'agsMovApp.services' is found in services.js
+// 'agsMovApp.controllers' is found in controllers.js
 (function() {
 
     'use strict';
 
 	angular
-		.module('starter', [
+		.module('agsMovApp', [
 			/* Shared modules */
 			'ionic',
-			'starter.core',
-			'starter.layout',
+			'agsMovApp.core',
+			'agsMovApp.layout',
 			/* Feature areas */
-			'starter.account',
-			'starter.chat',
-			'starter.dash'
+			'agsMovApp.inicio',
+			'agsMovApp.account',
+			'agsMovApp.chat',
+			'agsMovApp.dash'
 		]);
 })();

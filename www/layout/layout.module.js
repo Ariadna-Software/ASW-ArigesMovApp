@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('starter.layout', [
+    angular.module('agsMovApp.layout', [
     	
     ]);
 })();

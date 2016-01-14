@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('agsMovApp.dash')
+        .module('agsMovApp.inicio')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
@@ -13,17 +13,16 @@
 
     function getStates() {
         return [{
-            state: 'tab.dash',
+            state: 'tab.inicio',
             config: {
-                url: '/dash',
+                url: '/inicio',
                 views: {
-                    'tab-dash': {
-                        templateUrl: 'dash/tab-dash.html',
-                        controller: 'DashCtrl'
+                    'tab-inicio': {
+                        templateUrl: 'inicio/tab-inicio.html',
+                        controller: 'InicioCtrl'
                     }
                 }
             }
         }];
     }
 })();
-

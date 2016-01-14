@@ -1,5 +1,5 @@
 (function() {
     'use strict';
 
-    angular.module('starter.account', []);
+    angular.module('agsMovApp.account', []);
 })();

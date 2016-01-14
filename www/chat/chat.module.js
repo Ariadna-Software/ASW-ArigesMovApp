@@ -1,4 +1,4 @@
 (function() {
     'use strict';
-    angular.module('starter.chat', []);
+    angular.module('agsMovApp.chat', []);
 })();

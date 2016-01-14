@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('starter.layout')
+        .module('agsMovApp.layout')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
@@ -12,17 +12,15 @@
     }
 
     function getStates() {
-        return [
-            {
-                state: 'tab',
-                config: {
-									url: '/tab',
-									abstract: true,
-									//template: '<ion-view><ion-content><h1>Gesundheit</h1><ui-view/></ion-content></ion-view>'								
-                  templateUrl: 'layout/tabs.html'
-									//template: '<ui-view/>'
-                }
+        return [{
+            state: 'tab',
+            config: {
+                url: '/tab',
+                abstract: true,
+                //template: '<ion-view><ion-content><h1>Gesundheit</h1><ui-view/></ion-content></ion-view>'                             
+                templateUrl: 'layout/tabs.html'
+                    //template: '<ui-view/>'
             }
-        ];
+        }];
     }
 })();

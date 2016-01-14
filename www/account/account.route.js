@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('starter.account')
+        .module('agsMovApp.account')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
