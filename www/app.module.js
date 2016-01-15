@@ -17,6 +17,7 @@
 			'agsMovApp.layout',
 			/* Feature areas */
 			'agsMovApp.inicio',
+			'agsMovApp.config',
 			'agsMovApp.account',
 			'agsMovApp.chat',
 			'agsMovApp.dash'
