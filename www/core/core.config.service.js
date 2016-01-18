@@ -5,7 +5,7 @@
 
     ConfigFactory.$inject = ['LSFactory'];
 
-    function ConfigFactory() {
+    function ConfigFactory(LSFactory) {
         var configKey = "config";
 
         var CONFIGAPI = {
