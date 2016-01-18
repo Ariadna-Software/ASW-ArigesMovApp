@@ -1,0 +1,34 @@
+<ion-view view-title="AriGesMov - (c) Ariadna Software S.L.">
+	<ion-nav-bar class="bar-stable">
+		<ion-nav-back-button>
+		</ion-nav-back-button>
+	</ion-nav-bar>
+    <ion-content class="padding">
+        <ion-list ng-hide="searchComplete">
+        	<div class="item item-divider item-positive">
+        		<i class="icon ion-search"></i> Buscar cliente
+        	</div>
+        	<label class="item item-input">
+        		<input type="text" ng-model="datos.parnom" placeholder="Nombre del cliente..."/>
+        	</label>
+        	<div class="item item-body text-center">
+        		<button class="button" ng-click="searchClient()">
+        			<i class="icon ion-search"></i> Buscar
+        		</button>
+        	</div>
+        </ion-list>
+        <ion-list ng-show="searchComplete">
+            <ion-item class="item-positive item-button-right" ng-click="hideSearch()">
+                <i class="icon ion-funnel"></i> Resultados
+                <button class="button button-positive">
+                    <i class="icon ion-search"></i>
+                </button>
+            </ion-item>
+            <ion-item ng-repeat="cliente in datos.clientes" class="item-text-wrap item-icon-right" href="#">
+                <i class="icon ion-chevron-right"></i>
+                <h4> CIF: {{cliente.nifclien}} </h4>
+                <p> {{cliente.nomclien}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

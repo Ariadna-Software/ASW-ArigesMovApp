@@ -17,6 +17,13 @@
                     }
                 });
             },
+            getAgente: function(login){
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/trabajadores',{
+                    params: {
+                        "login": login
+                    }
+                })
+            },
             isUser: function() {
                 return this.getUser() === null ? false : true;
             },

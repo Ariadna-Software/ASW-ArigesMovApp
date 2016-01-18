@@ -17,26 +17,42 @@
             $scope.user = UserFactory.getUser();
         }
 
-
+        // el login debe acceder a dos bases de datos distintas
+        // de anhí las llamadas encadenadas
         $scope.login = function() {
             Loader.showLoading('Buscando usuario..');
             UserFactory.login($scope.loginData).
             success(function(data) {
                 Loader.hideLoading();
-                if (data) {
-                    UserFactory.setUser(data);
-                    $scope.load();
-                    $state.go('tab.inventario');
-                } else {
-                    Loader.toggleLoadingWithMessage("Login o password incorrectos");
-                    UserFactory.setUser(null);
-                    $scope.load();
-                }
+                // hay que obtener el código de agente
+                var data1 = data; // guardamos los datos
+                UserFactory.getAgente($scope.loginData.login).
+                success(function(data) {
+                    if (data) {
+                        data1.codagent = data.codagent; // ponemos el agente
+                        UserFactory.setUser(data1);
+                        $scope.load();
+                        $state.go('tab.clientes');
+                    } else {
+                        Loader.toggleLoadingWithMessage("Login o password incorrectos");
+                        UserFactory.setUser(null);
+                        $scope.load();
+                    }
+                }).
+                error(function(err, statusCode) {
+                    Loader.hideLoading();
+                    if (err) {
+                        var msg = err || err.message;
+                        Loader.toggleLoadingWithMessage(msg);
+                    } else {
+                        Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                    }
+                });
             }).
             error(function(err, statusCode) {
                 Loader.hideLoading();
                 if (err) {
-                	var msg = err || err.message;
+                    var msg = err || err.message;
                     Loader.toggleLoadingWithMessage(msg);
                 } else {
                     Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");

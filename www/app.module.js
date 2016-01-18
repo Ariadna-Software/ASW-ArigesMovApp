@@ -17,6 +17,7 @@
 			'agsMovApp.layout',
 			/* Feature areas */
 			'agsMovApp.inicio',
-			'agsMovApp.config'
+			'agsMovApp.config',
+			'agsMovApp.clientes'
 		]);
 })();
