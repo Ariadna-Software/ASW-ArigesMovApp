@@ -10,7 +10,6 @@
 
         $scope.datos = {
             parnom: null,
-            agente: null,
             clientes: []
         };
         
@@ -26,14 +25,11 @@
             $scope.isUser = UserFactory.isUser();
             $scope.user = UserFactory.getUser();
             $scope.searchComplete = false;
-            if ($scope.user) {
-                $scope.dsatos.agente = $scope.user.codagent;
-            }
         }
 
         $scope.searchClient = function(){
             Loader.showLoading('Buscando clientes..');
-            ClientesFactory.getClientes($scope.datos.agente, $scope.datos.parnom).
+            ClientesFactory.getClientes($scope.user.codagent, $scope.datos.parnom).
             success(function(data){
                 Loader.hideLoading();
                 $scope.searchComplete = true;
@@ -53,6 +49,10 @@
         $scope.hideSearch = function(){
             $scope.searchComplete = false;
             $scope.parnom = null;
+        }
+
+        $scope.goCliente = function(cliente){
+            
         }
 
         //$scope.load();

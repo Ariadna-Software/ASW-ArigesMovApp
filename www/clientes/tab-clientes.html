@@ -24,7 +24,7 @@
                     <i class="icon ion-search"></i>
                 </button>
             </ion-item>
-            <ion-item ng-repeat="cliente in datos.clientes" class="item-text-wrap item-icon-right" href="#">
+            <ion-item ng-repeat="cliente in datos.clientes" class="item-text-wrap item-icon-right" href="#" ng-click="goCliente(cliente)">
                 <i class="icon ion-chevron-right"></i>
                 <h4> CIF: {{cliente.nifclien}} </h4>
                 <p> {{cliente.nomclien}}</p>

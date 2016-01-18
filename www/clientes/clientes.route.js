@@ -23,6 +23,13 @@
                     }
                 }
             }
+        },{
+            state: 'cli',
+            config: {
+                url: '/cli',
+                abstract: true,
+                templateUrl: 'clientes/cli-menu.html'
+            }
         }];
     }
 })();
