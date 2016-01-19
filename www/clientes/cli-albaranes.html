@@ -1,0 +1,24 @@
+<ion-view view-title="{{datos.cliente.nomclien}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/clientes">
+            <i class="icon ion-log-out"></i> Clientes
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Albaranes
+            </ion-item>
+            <ion-item ng-repeat="albaran in datos.albaranes" class="item-text-wrap item-icon-right" ng-click="goAlbaran(albaran)">
+                <i class="icon ion-chevron-right"></i>
+                <div>
+                    <strong>N.Albaran: </strong> {{albaran.numalbar}}
+                    <strong>Fecha: </strong> {{albaran.fechaalb}}
+                </div>
+                <div>
+                    <strong>Total: </strong> {{albaran.totalalb}}
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

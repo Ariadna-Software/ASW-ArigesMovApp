@@ -27,7 +27,8 @@
             $scope.user = UserFactory.getUser();
             $scope.datos.cliente = ClientesFactory.getClienteLocal();
             // formateo numérico
-            $scope.datos.cliente.limiteCredito = numeral($scope.datos.cliente.limiteCredito).format('0,0.00 $');
+            if ($scope.datos.cliente.limiteCredito) 
+                $scope.datos.cliente.limiteCredito = numeral($scope.datos.cliente.limiteCredito).format('0,0.00 $');
             // búsqueda de indicadores
             Loader.showLoading('Buscando datos...');
             ClientesFactory.getIndicadores($scope.datos.cliente.codclien, $scope.datos.cliente.codmacta).

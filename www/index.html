@@ -17,10 +17,10 @@
       The nav bar that will be updated as we navigate between views.
     -->
     <ion-nav-bar class="bar-stable">
-    <!-- Provisionalmente inactivamos el botón back (navegarán con lo que le ofrezcamos en pantalla)
+        <!-- Provisionalmente inactivamos el botón back (navegarán con lo que le ofrezcamos en pantalla)
         <ion-nav-back-button>
         </ion-nav-back-button>
-    -->        
+    -->
     </ion-nav-bar>
     <!--
       The views will be rendered in the <ion-nav-view> directive below
@@ -39,6 +39,7 @@
     <!-- Utilities -->
     <script src="js/numeral.min.js"></script>
     <script src="js/moment.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?KEY=AIzaSyD3_kfo1nPFFiu_pl2NO2B7FctIy2mbnBI&amp;sensor=false"></script>
     <script src="js/init.utilities.js"></script>
     <!-- Reusable Blocks/Modules -->
     <script src="blocks/router/router.module.js"></script>
@@ -62,12 +63,25 @@
     <!-- TAB - config -->
     <script src="config/config.module.js"></script>
     <script src="config/config.route.js"></script>
-    <script src="config/config.controler.js"></script>    
+    <script src="config/config.controler.js"></script>
     <!-- TAB - clientes -->
     <script src="clientes/clientes.module.js"></script>
     <script src="clientes/clientes.route.js"></script>
-    <script src="clientes/clientes.controler.js"></script>    
-    <script src="clientes/clientes.datos.controler.js"></script>  
+    <script src="clientes/clientes.controler.js"></script>
+    <script src="clientes/clientes.datos.controler.js"></script>
+    <script src="clientes/clientes.contacto.controler.js"></script>
+    <script src="clientes/clientes.ofertas.controler.js"></script>
+    <script src="clientes/clientes.ofertas.detalle.controler.js"></script>
+    <script src="clientes/clientes.pedidos.controler.js"></script>
+    <script src="clientes/clientes.pedidos.detalle.controler.js"></script>
+    <script src="clientes/clientes.albaranes.controler.js"></script>
+    <script src="clientes/clientes.albaranes.detalle.controler.js"></script>
+    <script src="clientes/clientes.facturas.controler.js"></script>
+    <script src="clientes/clientes.facturas.detalle.controler.js"></script>
+    <!-- mapas -->
+    <script src="map/map.module.js"></script>
+    <script src="map/map.route.js"></script>
+    <script src="map/map.controler.js"></script>
     <!-- endinject -->
 </body>
 

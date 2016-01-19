@@ -1,0 +1,55 @@
+<ion-view view-title="{{datos.cliente.nomclien}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/clientes">
+            <i class="icon ion-log-out"></i> Clientes
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Contacto
+            </ion-item>
+            <ion-item class="item-text-wrap">
+                <div>{{datos.cliente.nomclien}}</div>
+                <div>{{datos.cliente.nifclien}}</div>
+            </ion-item>
+            <ion-item class="item-text-wrap">
+                <div>{{datos.cliente.domclien}}</div>
+                <div>({{datos.cliente.codpobla}}) {{datos.cliente.pobclien}}</div>
+                <div>{{datos.cliente.proclien}}</div>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Administración
+            </ion-item>
+            <ion-item class="item-text-wrap item-icon-right" href="tel:{{datos.cliente.telclie1}}">
+                <i class="icon ion-ios-telephone"></i> {{datos.cliente.perclie1}} ({{datos.cliente.telclie1}})
+            </ion-item>
+            <ion-item class="item-text-wrap item-icon-right" href="mailto:{{datos.cliente.maiclie1}}">
+                <i class="icon ion-email"></i> {{datos.cliente.maiclie1}}
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Comercial
+            </ion-item>
+            <ion-item class="item-text-wrap item-icon-right" href="tel:{{datos.cliente.telclie2}}">
+                <i class="icon ion-ios-telephone"></i> {{datos.cliente.perclie2}} ({{datos.cliente.telclie2}})
+            </ion-item>
+            <ion-item class="item-text-wrap item-icon-right" href="mailto:{{datos.cliente.maiclie2}}">
+                <i class="icon ion-email"></i> {{datos.cliente.maiclie2}}
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Localización
+            </ion-item>
+            <ion-item>
+                <button class="button button-block" ng-click="verMapa()">
+                    Ver en mapa
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

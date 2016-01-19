@@ -37,7 +37,7 @@
                 views: {
                     'menuContent': {
                         templateUrl: 'clientes/cli-contacto.html',
-                        controller: 'ClientesCtrl'
+                        controller: 'ClientesContactoCtrl'
                     }
                 }
             }
@@ -48,7 +48,7 @@
                 views: {
                     'menuContent': {
                         templateUrl: 'clientes/cli-ofertas.html',
-                        controller: 'ClientesCtrl'
+                        controller: 'ClientesOfertasCtrl'
                     }
                 }
             }
@@ -59,7 +59,7 @@
                 views: {
                     'menuContent': {
                         templateUrl: 'clientes/cli-ofertasDetalle.html',
-                        controller: 'ClientesCtrl'
+                        controller: 'ClientesOfertasDetalleCtrl'
                     }
                 }
             }
@@ -70,7 +70,7 @@
                 views: {
                     'menuContent': {
                         templateUrl: 'clientes/cli-pedidos.html',
-                        controller: 'ClientesCtrl'
+                        controller: 'ClientesPedidosCtrl'
                     }
                 }
             }
@@ -81,18 +81,18 @@
                 views: {
                     'menuContent': {
                         templateUrl: 'clientes/cli-pedidosDetalle.html',
-                        controller: 'ClientesCtrl'
+                        controller: 'ClientesPedidosDetalleCtrl'
                     }
                 }
             }
         },{
             state: 'cli.alabaranes',
             config: {
-                url: '/alabaranes',
+                url: '/albaranes',
                 views: {
                     'menuContent': {
-                        templateUrl: 'clientes/cli-alabaranes.html',
-                        controller: 'ClientesCtrl'
+                        templateUrl: 'clientes/cli-albaranes.html',
+                        controller: 'ClientesAlbaranesCtrl'
                     }
                 }
             }
@@ -103,18 +103,18 @@
                 views: {
                     'menuContent': {
                         templateUrl: 'clientes/cli-albaranesDetalle.html',
-                        controller: 'ClientesCtrl'
+                        controller: 'ClientesAlbaranesDetalleCtrl'
                     }
                 }
             }
         },{
-            state: 'cli.factura',
+            state: 'cli.facturas',
             config: {
-                url: '/factura',
+                url: '/facturas',
                 views: {
                     'menuContent': {
-                        templateUrl: 'clientes/cli-factura.html',
-                        controller: 'ClientesCtrl'
+                        templateUrl: 'clientes/cli-facturas.html',
+                        controller: 'ClientesFacturaCtrl'
                     }
                 }
             }
@@ -125,7 +125,7 @@
                 views: {
                     'menuContent': {
                         templateUrl: 'clientes/cli-facturasDetalle.html',
-                        controller: 'ClientesCtrl'
+                        controller: 'ClientesFacturaDetalleCtrl'
                     }
                 }
             }

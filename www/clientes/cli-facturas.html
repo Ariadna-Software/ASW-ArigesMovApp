@@ -1,0 +1,28 @@
+<ion-view view-title="{{datos.cliente.nomclien}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/clientes">
+            <i class="icon ion-log-out"></i> Clientes
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Facturas
+            </ion-item>
+            <ion-item ng-repeat="factura in datos.facturas" class="item-text-wrap item-icon-right" ng-click="goFactura(factura)">
+                <i class="icon ion-chevron-right"></i>
+                <div>
+                    <strong>N.Factura: </strong> {{factura.numfactu}}
+                    <strong>Fecha: </strong> {{factura.fecfactu}}
+                </div>
+                <div>
+                    <strong>Bases: </strong> {{factura.bases}}
+                    <strong>Cuotas: </strong> {{factura.cuotas}}
+                </div>
+                <div>
+                    <strong>Total: </strong> {{factura.totalfac}}
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

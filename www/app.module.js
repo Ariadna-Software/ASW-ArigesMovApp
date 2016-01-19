@@ -18,6 +18,7 @@
 			/* Feature areas */
 			'agsMovApp.inicio',
 			'agsMovApp.config',
-			'agsMovApp.clientes'
+			'agsMovApp.clientes',
+			'agsMovApp.map'
 		]);
 })();

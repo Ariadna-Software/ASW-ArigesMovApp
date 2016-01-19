@@ -1,0 +1,24 @@
+<ion-view view-title="{{datos.cliente.nomclien}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/clientes">
+            <i class="icon ion-log-out"></i> Clientes
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Pedidos
+            </ion-item>
+            <ion-item ng-repeat="pedido in datos.pedidos" class="item-text-wrap item-icon-right" ng-click="goPedido(pedido)">
+                <i class="icon ion-chevron-right"></i>
+                <div>
+                    <strong>N.Pedido: </strong> {{pedido.numpedcl}}
+                    <strong>Fecha: </strong> {{pedido.fecpedcl}}
+                </div>
+                <div>
+                    <strong>Total: </strong> {{pedido.totalped}}
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
