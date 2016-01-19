@@ -52,7 +52,10 @@
         }
 
         $scope.goCliente = function(cliente){
-            
+            // guardar el cliente en local
+            ClientesFactory.saveClienteLocal(cliente);
+            // ir a la vista adecuada
+            $state.go('cli.datos');
         }
 
         //$scope.load();
