@@ -5,21 +5,36 @@
         </a>
     </ion-nav-buttons>
     <ion-content class="padding">
-        <ion-list>
-            <ion-item class="item-divider item-positive">
-                Albaranes
+        <ion-list ng-hide="searchComplete">
+            <div class="item item-divider item-positive">
+                <i class="icon ion-search"></i> Buscar artículo
+            </div>
+            <label class="item item-input">
+                <input type="text" ng-model="datos.parnom" placeholder="Nombre del artículo..." />
+            </label>
+            <div class="item item-body text-center">
+                <button class="button" ng-click="searchArticulos()">
+                    <i class="icon ion-search"></i> Buscar
+                </button>
+            </div>
+        </ion-list>
+        <ion-list ng-show="searchComplete">
+            <ion-item class="item-positive item-button-right" ng-click="hideSearch()">
+                <i class="icon ion-funnel"></i> Resultados
+                <button class="button button-positive">
+                    <i class="icon ion-search"></i>
+                </button>
             </ion-item>
-            <ion-item ng-repeat="albaran in datos.albaranes" class="item-text-wrap item-icon-right" ng-click="goAlbaran(albaran)">
+            <ion-item ng-repeat="articulo in datos.articulos" class="item-text-wrap item-icon-right" href="#" ng-click="goArticulo(articulo)">
                 <i class="icon ion-chevron-right"></i>
+                <h2>{{articulo.nomartic}}</h2>
                 <div>
-                    <strong>N.Albaran: </strong> {{albaran.numalbar}}
-                    <strong>Fecha: </strong> {{albaran.fechaalb}}
-                </div>
-                <div>
-                    <strong>Total: </strong> {{albaran.totalalb}}
+                    <strong>Codigo:</strong> {{articulo.codartic}}
+                    <strong>PVP: </strong> {{articulo.precio.importe}}
+                    <strong>Stock: </strong> {{articulo.stock}}
                 </div>
             </ion-item>
         </ion-list>
     </ion-content>
-    
+
 </ion-view>

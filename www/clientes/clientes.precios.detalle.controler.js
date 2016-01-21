@@ -2,15 +2,15 @@
     'use strict';
 
     angular.module('agsMovApp.clientes')
-        .controller('ClientesAlbaranesDetalleCtrl', ClientesAlbaranesDetalleCtrl);
+        .controller('ClientesPreciosDetalleCtrl', ClientesPreciosDetalleCtrl);
 
-    ClientesAlbaranesDetalleCtrl.$inject = ['$rootScope', '$scope', '$state', 'ClientesFactory', 'UserFactory', 'Loader'];
+    ClientesPreciosDetalleCtrl.$inject = ['$rootScope', '$scope', '$state', 'ClientesFactory', 'UserFactory', 'ArticulosFactory', 'Loader'];
 
-    function ClientesAlbaranesDetalleCtrl($rootScope, $scope, $state, ClientesFactory, UserFactory, Loader) {
+    function ClientesPreciosDetalleCtrl($rootScope, $scope, $state, ClientesFactory, UserFactory, ArticulosFactory, Loader) {
 
         $scope.datos = {
             cliente: null,
-            albaran: null
+            articulo: null
         };
 
         $scope.$on('$ionicView.enter', function(e) {
@@ -25,7 +25,7 @@
             $scope.isUser = UserFactory.isUser();
             $scope.user = UserFactory.getUser();
             $scope.datos.cliente = ClientesFactory.getClienteLocal();
-            $scope.datos.albaran = ClientesFactory.getAlbaranLocal();
+            $scope.datos.articulo = ArticulosFactory.getArticuloLocal();
         }
 
        //$scope.load();

@@ -7,25 +7,28 @@
     <ion-content class="padding">
         <ion-list>
             <ion-item class="item-divider item-positive">
-                Albarán {{datos.albaran.numalbar}}
+                Articulo {{datos.articulo.nomartic}}
+            </ion-item>
+            <ion-item class="item-text-wrap">
+                <div>
+                    <strong>Codigo:</strong> {{datos.articulo.codartic}}
+                    <strong>PVP: </strong> {{datos.articulo.precio.importe}}
+                    <strong>Stock: </strong> {{datos.articulo.stock}}
+                </div>
             </ion-item>
             <ion-item class="item-text-wrap row">
-                <div class="col"><strong>Linea</strong></div>
-                <div class="col"><strong>Articulo</strong></div>
-                <div class="col text-right"><strong>Cantidad</strong></div>
+                <div class="col"><strong>Origen</strong></div>
                 <div class="col text-right"><strong>Precio</strong></div>
                 <div class="col text-right"><strong>Dto1</strong></div>
                 <div class="col text-right"><strong>Dto2</strong></div>
                 <div class="col text-right"><strong>Importe</strong></div>
             </ion-item>
-            <ion-item ng-repeat="linea in datos.albaran.lineas" class="item-text-wrap row">
-                <div class="col">{{linea.numlinea}}</div>
-                <div class="col">{{linea.nomartic}}</div>
-                <div class="col text-right">{{linea.cantidad}}</div>
-                <div class="col text-right">{{linea.precioar}}</div>
-                <div class="col text-right">{{linea.dtoline1}}</div>
-                <div class="col text-right">{{linea.dtoline2}}</div>
-                <div class="col text-right">{{linea.importel}}</div>
+            <ion-item class="item-text-wrap row">
+                <div class="col">{{datos.articulo.precio.origen}}</div>
+                <div class="col text-right">{{datos.articulo.precio.pvp}}</div>
+                <div class="col text-right">{{datos.articulo.precio.dto1}}</div>
+                <div class="col text-right">{{datos.articulo.precio.dto2}}</div>
+                <div class="col text-right">{{datos.articulo.precio.importe}}</div>
             </ion-item>
         </ion-list>
     </ion-content>
