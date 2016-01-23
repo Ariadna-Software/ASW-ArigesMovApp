@@ -25,6 +25,20 @@
                     }
                 })
             },
+            getArticulosPreciosEspeciales: function(codclien) {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/articulos/precios-especiales', {
+                    params: {
+                        "codclien": codclien
+                    }
+                })
+            },
+            getArticulosDescuentosEspeciales: function(codclien) {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/articulos/descuentos-especiales', {
+                    params: {
+                        "codclien": codclien
+                    }
+                })
+            },
             saveArticuloLocal: function(articulo) {
                 LSFactory.set('articulo', articulo);
             },

@@ -158,7 +158,7 @@
                     views: {
                         'menuContent': {
                             templateUrl: 'clientes/cli-preciosEspeciales.html',
-                            controller: 'ClientesCtrl'
+                            controller: 'ClientesPreciosEspecialesCtrl'
                         }
                     }
                 }
@@ -168,8 +168,8 @@
                     url: '/descuentos',
                     views: {
                         'menuContent': {
-                            templateUrl: 'clientes/cli-descuentos.html',
-                            controller: 'ClientesCtrl'
+                            templateUrl: 'clientes/cli-descuentosEspeciales.html',
+                            controller: 'ClientesDescuentosEspecialesCtrl'
                         }
                     }
                 }
