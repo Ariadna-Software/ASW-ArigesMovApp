@@ -1,0 +1,40 @@
+<ion-view view-title="{{datos.articulo.nomartic}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/articulos">
+            <i class="icon ion-log-out"></i> Articulos
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Detalle
+            </ion-item>
+            <ion-item class="item-text-wrap">
+                <div>
+                    <strong>Familia: </strong>{{datos.articulo.nomfamia}}
+                </div>
+                <div>
+                    <strong>Proveedor: </strong>{{datos.articulo.nomprove}}
+                </div>
+                <div>
+                    <strong>Referencia: </strong>{{datos.articulo.referprov}}
+                </div>
+                <div>{{datos.proveedor.nifprove}}</div>
+            </ion-item>
+            <ion-item class="item-text-wrap row">
+                <div class="col text-right"><strong>PVP</strong></div>
+                <div class="col text-right"><strong>Stock</strong></div>
+                <div class="col text-right"><strong>Reservas</strong></div>
+                <div class="col text-right"><strong>Pedidos</strong></div>
+                <div class="col"><strong>Rotacion</strong></div>
+            </ion-item>
+            <ion-item class="item-text-wrap row">
+                <div class="col text-right">{{datos.articulo.preciove}}</div>
+                <div class="col text-right">{{datos.articulo.stock}}</div>
+                <div class="col text-right">{{datos.articulo.reservas}}</div>
+                <div class="col text-right">{{datos.articulo.pedido}}</div>
+                <div class="col">{{datos.articulo.rotacion}}</div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

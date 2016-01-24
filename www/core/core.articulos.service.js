@@ -39,6 +39,17 @@
                     }
                 })
             },
+            getArticulosExt: function(parnom, parpro, parfam, codigo, obsole) {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/articulos/ext', {
+                    params: {
+                        "parnom": parnom,
+                        "parpro": parpro,
+                        "parfam": parfam,
+                        "codigo": codigo,
+                        "obsole": obsole
+                    }
+                })
+            },
             saveArticuloLocal: function(articulo) {
                 LSFactory.set('articulo', articulo);
             },

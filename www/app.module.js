@@ -20,6 +20,7 @@
 			'agsMovApp.config',
 			'agsMovApp.clientes',
 			'agsMovApp.map',
-            'agsMovApp.proveedores'
+            'agsMovApp.proveedores',
+            'agsMovApp.articulos'
 		]);
 })();

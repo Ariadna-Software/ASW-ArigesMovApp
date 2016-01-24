@@ -1,0 +1,61 @@
+<ion-view view-title="AriGesMov - (c) Ariadna Software S.L.">
+    <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content class="padding">
+        <ion-list ng-hide="searchComplete">
+            <div class="item item-divider item-positive">
+                <i class="icon ion-search"></i> Buscar articulo
+            </div>
+            <label class="item item-input item-stacked-label">
+                <p>Articulo:</p>
+                <input type="text" ng-model="datos.parnom" placeholder="Nombre del articulo...">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <p>Proveedor:</p>
+                <input type="text" ng-model="datos.parpro" ng-change="searchProveedores()" placeholder="Nombre del proveedor...">
+            </label>
+            <ion-item ng-show="searchProveedor">
+                <div class="list">
+                    <li class="item" ng-repeat="proveedor in datos.proveedores" ng-click="selectProveedor(proveedor)">{{proveedor.nomprove}}</li>
+                </div>
+            </ion-item>            
+            <label class="item item-input item-stacked-label">
+                <p>Familia:</p>
+                <input type="text" ng-model="datos.parfam" ng-change="searchFamilias()" placeholder="Nombre de la familia...">
+            </label>
+            <ion-item ng-show="searchFamilia">
+                <div class="list">
+                    <li class="item" ng-repeat="familia in datos.familias" ng-click="selectFamilia(familia)">{{familia.nomfamia}}</li>
+                </div>
+            </ion-item>
+            <label class="item item-input item-stacked-label">
+                <p>Codigo:</p>
+                <input type="text" ng-model="datos.codigo" placeholder="Código del artículo...">
+            </label>
+            <label class="item item-input">
+                <ion-checkbox ng-model="datos.obsole">Incluir obsoletos</ion-checkbox>
+            </label>
+
+            <div class="item item-body text-center">
+                <button class="button" ng-click="searchArticulos()">
+                    <i class="icon ion-search"></i> Buscar
+                </button>
+            </div>
+        </ion-list>
+        <ion-list ng-show="searchComplete">
+            <ion-item class="item-positive item-button-right" ng-click="hideSearch()">
+                <i class="icon ion-funnel"></i> Resultados
+                <button class="button button-positive">
+                    <i class="icon ion-search"></i>
+                </button>
+            </ion-item>
+            <ion-item ng-repeat="articulo in datos.articulos" class="item-text-wrap item-icon-right" href="#" ng-click="goArticulo(articulo)">
+                <i class="icon ion-chevron-right"></i>
+                <h4> Codigo: {{articulo.codartic}} </h4>
+                <p> {{articulo.nomartic}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
