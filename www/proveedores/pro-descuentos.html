@@ -1,0 +1,26 @@
+<ion-view view-title="{{datos.proveedor.nomprove}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/proveedores">
+            <i class="icon ion-log-out"></i> Proveedores
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Descuentos / Rappeles
+            </ion-item>
+            <ion-item ng-repeat="descuento in datos.descuentos" class="item-text-wrap item-icon-right">
+                <div>
+                    <strong>Familia: </strong> {{descuento.nomfamia}}
+                    <strong>Marca: </strong> {{descuento.nomarca}}
+                </div>
+                <div>
+                    <strong>Dto1: </strong> {{descuento.dtoline1}}
+                    <strong>Dto2: </strong> {{descuento.dtoline2}}
+                    <strong>Rap1: </strong> {{descuento.rap1}}
+                    <strong>Rap2: </strong> {{descuento.rap2}}
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

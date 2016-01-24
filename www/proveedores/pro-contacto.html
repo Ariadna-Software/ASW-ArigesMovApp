@@ -1,0 +1,45 @@
+<ion-view view-title="{{datos.proveedor.nomprove}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/proveedores">
+            <i class="icon ion-log-out"></i> Proveedores
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Contacto
+            </ion-item>
+            <ion-item class="item-text-wrap">
+                <div>{{datos.proveedor.nomprove}}</div>
+                <div>{{datos.proveedor.nifprove}}</div>
+            </ion-item>
+            <ion-item class="item-text-wrap">
+                <div>{{datos.proveedor.domprove}}</div>
+                <div>({{datos.proveedor.codpobla}}) {{datos.proveedor.pobprove}}</div>
+                <div>{{datos.proveedor.proprove}}</div>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Administración
+            </ion-item>
+            <ion-item class="item-text-wrap item-icon-right" href="tel:{{datos.proveedor.telprov1}}">
+                <i class="icon ion-ios-telephone"></i> {{datos.proveedor.perprov1}} ({{datos.proveedor.telprov1}})
+            </ion-item>
+            <ion-item class="item-text-wrap item-icon-right" href="mailto:{{datos.proveedor.maiprov1}}">
+                <i class="icon ion-email"></i> {{datos.proveedor.maiprov1}}
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Comercial
+            </ion-item>
+            <ion-item class="item-text-wrap item-icon-right" href="tel:{{datos.proveedor.telprov2}}">
+                <i class="icon ion-ios-telephone"></i> {{datos.proveedor.perprov2}} ({{datos.proveedor.telprov2}})
+            </ion-item>
+            <ion-item class="item-text-wrap item-icon-right" href="mailto:{{datos.proveedor.maiprov2}}">
+                <i class="icon ion-email"></i> {{datos.proveedor.maiprov2}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

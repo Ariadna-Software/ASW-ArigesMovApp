@@ -19,6 +19,7 @@
 			'agsMovApp.inicio',
 			'agsMovApp.config',
 			'agsMovApp.clientes',
-			'agsMovApp.map'
+			'agsMovApp.map',
+            'agsMovApp.proveedores'
 		]);
 })();
