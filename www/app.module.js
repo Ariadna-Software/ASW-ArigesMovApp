@@ -21,6 +21,7 @@
 			'agsMovApp.clientes',
 			'agsMovApp.map',
             'agsMovApp.proveedores',
-            'agsMovApp.articulos'
+            'agsMovApp.articulos',
+            'agsMovApp.pedidos'
 		]);
 })();
