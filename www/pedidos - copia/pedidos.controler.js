@@ -70,12 +70,6 @@
             // ir a la vista adecuada
             $state.go('ped.detalle');
         };
-        
-        $scope.crearPedido = function (pedido){
-            // hacemos el pedido local nulo
-            PedidosFactory.savePedidoLocal(null);
-            $state.go('ped.detalle');
-        }
 
         //$scope.load();
     }

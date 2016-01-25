@@ -26,9 +26,6 @@
             $scope.datos.articulo = ArticulosFactory.getArticuloLocal();
         }
 
-        $scope.verMapa = function() {
-            //$state.go('map');
-        };
 
         //$scope.load();
     }

@@ -5,7 +5,8 @@
         </a>
     </ion-nav-buttons>
     <ion-content class="padding">
-        <ion-list>
+        <!-- Cabecera normal -->
+        <ion-list ng-hide="enEdicionCabecera">
             <ion-item class="item-divider item-positive">
                 Cabecera
             </ion-item>
@@ -19,8 +20,51 @@
                     <strong>Total: </strong>{{datos.pedido.totalped}}
                 </div>
             </ion-item>
+        </ion-list>
+        <!-- Cabecera en edicion -->
+        <ion-list ng-show="enEdicionCabecera">
             <ion-item class="item-divider item-positive">
+                Cabecera [EDICIÓN]
+            </ion-item class="item-text-wrap">
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Agente:</strong></span>
+                <span>{{user.nomagent}}</span>
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Cliente:</strong></span>
+                <input type="text" ng-model="datos.parnomcli" ng-change="searchClientes()">
+            </ion-item>
+            <ion-item ng-show="searchCliente">
+                <div class="list">
+                    <li class="item" ng-repeat="cliente in datos.clientes" ng-click="selectCliente(cliente)">{{cliente.nomclien}}</li>
+                </div>
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Fecha:</strong></span>
+                <input type="text" ng-model="datos.feccab">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Total:</strong></span>
+                <span> {{datos.pedido.totalped}}</span>
+            </ion-item>
+            <ion-item>
+                <div class="text-center">
+                    <button class="button" ng-click="guardarCabecera()">
+                        <i class="icon ion-ios-download-outline"></i> Guardar
+                    </button>
+                    <button class="button" ng-click="cancelarCabecera()">
+                        <i class="icon ion-android-close"></i> Cancelar
+                    </button>
+                </div>
+            </ion-item>
+        </ion-list>
+        <!-- Lineas normal -->
+        <ion-list ng-hide="enEdicionLinea">
+            <ion-item class="item-divider item-positive item-button-right">
                 Lineas
+                <button ng-hide="enEdicionCabecera" class="button button-positive" ng-click="crearLinea()">
+                    <i class="icon ion-plus"></i>
+                </button>
             </ion-item>
             <ion-item class="item-text-wrap row">
                 <div class="col"><strong>Linea</strong></div>
@@ -39,6 +83,47 @@
                 <div class="col text-right">{{linea.dtoline1}}</div>
                 <div class="col text-right">{{linea.dtoline2}}</div>
                 <div class="col text-right">{{linea.importel}}</div>
+            </ion-item>
+        </ion-list>
+        <!-- Lineas en edicion -->
+        <ion-list ng-show="enEdicionLinea">
+            <ion-item class="item-divider item-positive">
+                Linea [EDICIÓN]
+            </ion-item class="item-text-wrap">
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Linea:</strong></span>
+                <span> {{linped.numlinea}}</span>
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Articulo:</strong></span>
+                <input type="text" ng-model="linped.nomartic" ng-change="searchArticulos()">
+            </ion-item>
+            <ion-item ng-show="searchArticulo">
+                <div class="list">
+                    <li class="item" ng-repeat="articulo in datos.articulos" ng-click="selectArticulo(articulo)">{{articulo.nomartic}}</li>
+                </div>
+            </ion-item>            
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Precio:</strong></span>
+                <span> {{linped.precioar}}</span>
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Cantidad:</strong></span>
+                <input type="text" ng-model="linped.cantidad" ng-change="cambiaCantidad()">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label"><strong>Importe:</strong></span>
+                <span>{{linped.importel}}</span>
+            </ion-item>
+            <ion-item>
+                <div class="text-center">
+                    <button class="button" ng-click="guardarLinea()">
+                        <i class="icon ion-ios-download-outline"></i> Guardar
+                    </button>
+                    <button class="button" ng-click="cancelarLinea()">
+                        <i class="icon ion-android-close"></i> Cancelar
+                    </button>
+                </div>
             </ion-item>
         </ion-list>
     </ion-content>

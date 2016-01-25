@@ -30,6 +30,8 @@
                 success(function(data) {
                     if (data) {
                         data1.codagent = data.codagent; // ponemos el agente
+                        data1.nomagent = data.nomagent;
+                        data1.codtraba = data.codtraba;
                         UserFactory.setUser(data1);
                         $scope.load();
                         $state.go('tab.clientes');
