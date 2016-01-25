@@ -31,6 +31,9 @@
             saveFacturaLocal: function(factura) {
                 LSFactory.set('factura', factura);
             },
+            saveCobroLocal: function(cobro) {
+                LSFactory.set('cobro', cobro);
+            },
             getClienteLocal: function() {
                 return LSFactory.get('cliente');
             },
@@ -45,6 +48,9 @@
             },
             getFacturaLocal: function() {
                 return LSFactory.get('factura');
+            },
+            getCobroLocal: function() {
+                return LSFactory.get('cobro');
             },
             getIndicadores: function(codclien, codmacta) {
                 return $http.get(ConfigFactory.getConfig().urlApi + '/api/indicadores', {

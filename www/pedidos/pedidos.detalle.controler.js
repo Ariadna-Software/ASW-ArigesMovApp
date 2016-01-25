@@ -22,7 +22,7 @@
 
         $scope.cabped = {
             numpedcl: 0,
-            fecpedcl: null,
+            fecpedcl: moment(new Date()).format('DD/MM/YYYY'),
             codclien: null,
             codtraba: 0,
             codagent: 0,

@@ -184,6 +184,17 @@
                         }
                     }
                 }
+            }, {
+                state: 'cli.cobro',
+                config: {
+                    url: '/cobro',
+                    views: {
+                        'menuContent': {
+                            templateUrl: 'clientes/cli-cobro.html',
+                            controller: 'ClientesCobrosCtrl'
+                        }
+                    }
+                }
             }];
     }
 })();

@@ -1,0 +1,30 @@
+<ion-view view-title="{{datos.cliente.nomclien}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/clientes">
+            <i class="icon ion-log-out"></i> Clientes
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Cobros
+            </ion-item>
+            <ion-item>
+                <div>
+                    <strong>Fecha ven.:</strong> {{datos.cobro.fechavenci}}
+                    <strong>Tipo cobro:</strong {{datos.cobro.nomforpa}}
+                </div>
+                <div>
+                    <strong>Factura:</strong> {{datos.cobro.numfact}}
+                    <strong>F. Factura:</strong> {{datos.cobro.fechafact}}
+                </div>
+                <div>
+                    <strong>Importe:</strong> {{datos.cobro.total}}
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            
+        </ion-list>
+    </ion-content>
+</ion-view>
