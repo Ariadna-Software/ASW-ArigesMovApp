@@ -13,6 +13,7 @@
 		.module('agsMovApp', [
 			/* Shared modules */
 			'ionic',
+            'ngMessages',
 			'agsMovApp.core',
 			'agsMovApp.layout',
 			/* Feature areas */

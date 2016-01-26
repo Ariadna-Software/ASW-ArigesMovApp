@@ -7,6 +7,8 @@
     InicioCtrl.$inject = ['$rootScope', '$scope', '$state', 'UserFactory', 'Loader'];
 
     function InicioCtrl($rootScope, $scope, $state, UserFactory, Loader) {
+        $scope.hayErrores = false;
+        
         $scope.loginData = {
             login: "",
             password: ""
@@ -19,7 +21,11 @@
 
         // el login debe acceder a dos bases de datos distintas
         // de anhí las llamadas encadenadas
-        $scope.login = function() {
+        $scope.login = function(form) {
+            if (!form.$valid){
+                $scope.hayErrores = true;
+                return;
+            }
             Loader.showLoading('Buscando usuario..');
             UserFactory.login($scope.loginData).
             success(function(data) {
