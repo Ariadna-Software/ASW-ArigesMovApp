@@ -4,9 +4,9 @@
     angular.module('agsMovApp.pedidos')
         .controller('PedidosDetalleCtrl', PedidosDetalleCtrl);
 
-    PedidosDetalleCtrl.$inject = ['$rootScope', '$scope', '$state', 'PedidosFactory', 'UserFactory', 'ClientesFactory', 'ArticulosFactory', 'Loader'];
+    PedidosDetalleCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopup', 'PedidosFactory', 'UserFactory', 'ClientesFactory', 'ArticulosFactory', 'Loader'];
 
-    function PedidosDetalleCtrl($rootScope, $scope, $state, PedidosFactory, UserFactory, ClientesFactory, ArticulosFactory, Loader) {
+    function PedidosDetalleCtrl($rootScope, $scope, $state, $ionicPopup, PedidosFactory, UserFactory, ClientesFactory, ArticulosFactory, Loader) {
 
         $scope.datos = {
             pedido: null,
@@ -214,7 +214,7 @@
         };
 
         $scope.guardarLinea = function () {
-            if (!$scope.linped.numlinea){
+            if (!$scope.linped.numlinea) {
                 $scope.linped.numlinea = 0;
             }
             if ($scope.linped.numlinea != 0) {
@@ -266,7 +266,23 @@
 
         $scope.cancelarLinea = function () {
             $scope.enEdicionLinea = false;
-        }
+        };
+        
+        // A confirm dialog
+        $scope.borrarPedido = function () {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Pedidos',
+                template: '¿Seguro que desea borra el pedido ' + $scope.datos.pedido.numpedcl + ' ?'
+            });
+
+            confirmPopup.then(function (res) {
+                if (res) {
+                    console.log('Seguro');
+                } else {
+                    console.log('Ni de coña');
+                }
+            });
+        };
         //$scope.load();
         function round(value, decimals) {
             return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
