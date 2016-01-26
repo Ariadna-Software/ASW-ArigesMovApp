@@ -18,6 +18,14 @@
             getPedidos: function () {
                 return $http.get(ConfigFactory.getConfig().urlApi + '/api/pedidos');
             },
+            getPedidosAgente: function (codagent) {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/pedidos/agente', {
+                    params: {
+                        "codagent": codagent
+                    }
+                });
+            },
+
             postCabPedido: function (data) {
                 return $http.post(ConfigFactory.getConfig().urlApi + '/api/pedidos/cabpedido', data);
             },

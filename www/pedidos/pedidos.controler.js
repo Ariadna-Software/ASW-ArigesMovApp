@@ -33,7 +33,7 @@
             }
             Loader.showLoading('Buscando pedidos..');
             $scope.searchFamilia = true;
-            PedidosFactory.getPedidos().
+            PedidosFactory.getPedidosAgente($scope.user.codagent).
                 success(function (data) {
                     Loader.hideLoading();
                     // formateo de los datos numéricos
