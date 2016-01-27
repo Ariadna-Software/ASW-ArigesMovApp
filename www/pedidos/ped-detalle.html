@@ -10,13 +10,12 @@
             <ion-item class="item-positive item-button-right">
                 Cabecera
                 <div class="buttons">
-                    <button class="button button-positive" ng-click="editarCabecera()">
-                        <i class="icon ion-edit"></i>
-                    </button>
                     <button class="button button-positive" ng-click="borrarPedido()">
                         <i class="icon ion-trash-b"></i>
                     </button>
-
+                    <button class="button button-positive" ng-click="editarCabecera()">
+                        <i class="icon ion-edit"></i>
+                    </button>
                 </div>
             </ion-item>
             <ion-item class="item-text-wrap">
@@ -31,42 +30,60 @@
             </ion-item>
         </ion-list>
         <!-- Cabecera en edicion -->
-        <ion-list ng-show="enEdicionCabecera">
-            <ion-item class="item-positive">
-                Cabecera [EDICIÓN]
-            </ion-item class="item-text-wrap">
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Agente:</strong></span>
-                <span class="positive">{{user.nomagent}}</span>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Cliente:</strong></span>
-                <input type="text" ng-model="datos.parnomcli" ng-change="searchClientes()">
-            </ion-item>
-            <ion-item ng-show="searchCliente">
-                <div class="list">
-                    <li class="item" ng-repeat="cliente in datos.clientes" ng-click="selectCliente(cliente)">{{cliente.nomclien}}</li>
+        <form name="cabForm" novalidate="" ng-show="enEdicionCabecera">
+            <ion-list>
+                <ion-item class="item-positive">
+                    Cabecera [EDICIÓN]
+                </ion-item class="item-text-wrap">
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Agente:</strong></span>
+                    <span class="positive">{{user.nomagent}}</span>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Cliente:</strong></span>
+                    <input type="text" name="cliente" ng-model="datos.parnomcli" ng-change="searchClientes()" required>
+                </ion-item>
+                <div ng-show="hayErrCab" ng-messages="cabForm.cliente.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                    <div class="error" ng-message="eCliente">
+                        <i class="ion-information-circled"></i> Debe seleccionar un cliente válido
+                    </div>
                 </div>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Fecha:</strong></span>
-                <input type="text" ng-model="datos.feccab">
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Total:</strong></span>
-                <span class="positive"> {{datos.pedido.totalped}}</span>
-            </ion-item>
-            <ion-item>
-                <div class="text-center">
-                    <button class="button" ng-click="guardarCabecera()">
-                        <i class="icon ion-ios-download-outline"></i> Guardar
-                    </button>
-                    <button class="button" ng-click="cancelarCabecera()">
-                        <i class="icon ion-android-close"></i> Cancelar
-                    </button>
+                <ion-item ng-show="searchCliente">
+                    <div class="list">
+                        <li class="item" ng-repeat="cliente in datos.clientes" ng-click="selectCliente(cliente)">{{cliente.nomclien}}</li>
+                    </div>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Fecha:</strong></span>
+                    <input type="text" name="fecha" ng-model="datos.feccab" required>
+                </ion-item>
+                <div ng-show="hayErrCab" ng-messages="cabForm.fecha.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                    <div class="error" ng-message="eFecha">
+                        <i class="ion-information-circled"></i> Introduzca una fecha válida (DD/MM/AAAA)
+                    </div>
                 </div>
-            </ion-item>
-        </ion-list>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Total:</strong></span>
+                    <span class="positive"> {{datos.pedido.totalped}}</span>
+                </ion-item>
+                <ion-item>
+                    <div class="text-center">
+                        <button class="button" ng-click="guardarCabecera(cabForm)">
+                            <i class="icon ion-ios-download-outline"></i> Guardar
+                        </button>
+                        <button class="button" ng-click="cancelarCabecera()">
+                            <i class="icon ion-android-close"></i> Cancelar
+                        </button>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </form>
         <!-- Lineas normal -->
         <ion-list ng-hide="enEdicionLinea">
             <ion-item class="item-positive item-button-right">

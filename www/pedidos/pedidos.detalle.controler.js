@@ -62,6 +62,10 @@
                     codclien: $scope.datos.pedido.codclien,
                     nomclien: $scope.datos.pedido.nomclien
                 };
+            } else {
+                // si no hay pedido es que es un alta
+                $scope.datos.parnomcli = "";
+                $scope.datos.feccab = "";
             }
             $scope.searchCliente = false;
             $scope.searchArticulo = false;
@@ -81,7 +85,7 @@
         }
 
         $scope.searchClientes = function () {
-            if ($scope.datos.parnomcli == "") {
+            if (!$scope.datos.parnomcli) {
                 $scope.searchCliente = false;
                 return;
             }
@@ -117,7 +121,34 @@
             $scope.enEdicionCabecera = true;
         };
 
-        $scope.guardarCabecera = function () {
+        var cabDatosOk = function (form) {
+            var r = true;
+            if (!$scope.datos.cliente) {
+                form.cliente.$error = {
+                    eCliente: true
+                };
+                r = false;
+            }
+            if (!moment($scope.datos.feccab, "DD/MM/YYYY").isValid()) {
+                form.fecha.$error = {
+                    eFecha: true
+                };
+                r = false;
+            }
+            return r;
+        };
+
+        $scope.guardarCabecera = function (form) {
+            $scope.hayErrCab = true;
+            if (!form.$valid) {
+                return;
+            } else {
+                // comprobaciones adicionales al form
+                if (!cabDatosOk(form)) {
+                    return;
+                }
+            }
+            $scope.hayErrCab = false;
             var dbreturn = null;
             if ($scope.datos.pedido) {
                 // es un update
@@ -178,7 +209,13 @@
         };
 
         $scope.cancelarCabecera = function () {
-            $scope.enEdicionCabecera = false;
+            if ($scope.datos.pedido) {
+                $scope.enEdicionCabecera = false;
+            }
+            else {
+                $state.go('tab.pedidos');
+            }
+
         };
 
         $scope.searchArticulos = function () {
