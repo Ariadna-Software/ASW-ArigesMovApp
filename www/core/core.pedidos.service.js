@@ -33,7 +33,11 @@
                 return $http.put(ConfigFactory.getConfig().urlApi + '/api/pedidos/cabpedido', data);
             },
             deleteCabPedido: function (data) {
-                return $http.delete(ConfigFactory.getConfig().urlApi + '/api/pedidos/cabpedido', data);
+                return $http.delete(ConfigFactory.getConfig().urlApi + '/api/pedidos/cabpedido', {
+                    params: {
+                        "numpedcl": data.numpedcl
+                    }
+                });
             },
             postLinPedido: function (data) {
                 return $http.post(ConfigFactory.getConfig().urlApi + '/api/pedidos/linpedido', data);

@@ -55,6 +55,14 @@
             $scope.isUser = UserFactory.isUser();
             $scope.user = UserFactory.getUser();
             $scope.datos.pedido = PedidosFactory.getPedidoLocal();
+            // hay que guardar en carga al menos el código de clinte
+            // por si entra en edición.
+            if ($scope.datos.pedido) {
+                $scope.datos.cliente = {
+                    codclien: $scope.datos.pedido.codclien,
+                    nomclien: $scope.datos.pedido.nomclien
+                };
+            }
             $scope.searchCliente = false;
             $scope.searchArticulo = false;
             if ($scope.datos.pedido) {
@@ -101,59 +109,76 @@
             $scope.searchCliente = false;
         };
 
+        $scope.editarCabecera = function () {
+            // ponemos los datos del pedido en los campos de edición
+            $scope.user.nomagent = $scope.datos.pedido.nomagent;
+            $scope.datos.parnomcli = $scope.datos.pedido.nomclien;
+            $scope.datos.feccab = $scope.datos.pedido.fecpedcl;
+            $scope.enEdicionCabecera = true;
+        };
+
         $scope.guardarCabecera = function () {
+            var dbreturn = null;
             if ($scope.datos.pedido) {
                 // es un update
- 
+                $scope.cabped.numpedcl = $scope.datos.pedido.numpedcl;
+                $scope.cabped.codforpa = $scope.datos.pedido.codforpa;
+                $scope.cabped.codagent = $scope.datos.pedido.codagent;
+                $scope.cabped.codtraba = $scope.user.codtraba;
+                $scope.cabped.fecpedcl = moment($scope.datos.feccab, "DD/MM/YYYY").format("YYYY-MM-DD");
+                $scope.cabped.codclien = $scope.datos.cliente.codclien;
+                dbreturn = PedidosFactory.putCabPedido($scope.cabped)
+
             } else {
                 // es un insert
                 $scope.cabped.codforpa = $scope.datos.cliente.codforpa;
-                $scope.cabped.codagent = $scope.user.codagent;
+                $scope.cabped.codagent = $scope.datos.cliente.codagent;
                 $scope.cabped.codtraba = $scope.user.codtraba;
-                $scope.cabped.fecpedcl = moment($scope.datos.feccab).format("YYYY-MM-DD");
+                $scope.cabped.fecpedcl = moment($scope.datos.feccab, "DD/MM/YYYY").format("YYYY-MM-DD");
                 $scope.cabped.codclien = $scope.datos.cliente.codclien;
-                Loader.showLoading('Guardando cabecera..');
-                PedidosFactory.postCabPedido($scope.cabped).
-                    success(function (data) {
-                        Loader.hideLoading();
-                        $scope.enEdicionCabecera = false;
-                        // al estar guardado en la base de datos lo podemos obtener
-                        PedidosFactory.getPedido(data.numpedcl).
-                            success(function (data) {
-                                data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
-                                if (data[0].totalped) {
-                                    data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
-                                }
-                                $scope.datos.pedido = data[0];
-                                PedidosFactory.savePedidoLocal(data[0]);
-                                Loader.hideLoading();
-                            }).
-                            error(function (err, statusCode) {
-                                Loader.hideLoading();
-                                $scope.searchCliente = false;
-                                if (err) {
-                                    var msg = err || err.message;
-                                    Loader.toggleLoadingWithMessage(msg);
-                                } else {
-                                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                                }
-                            });
-                    }).
-                    error(function (err, statusCode) {
-                        Loader.hideLoading();
-                        $scope.searchCliente = false;
-                        if (err) {
-                            var msg = err || err.message;
-                            Loader.toggleLoadingWithMessage(msg);
-                        } else {
-                            Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                        }
-                    });
+                dbreturn = PedidosFactory.postCabPedido($scope.cabped)
             }
+            Loader.showLoading('Guardando cabecera..');
+            dbreturn.
+                success(function (data) {
+                    Loader.hideLoading();
+                    $scope.enEdicionCabecera = false;
+                    // al estar guardado en la base de datos lo podemos obtener
+                    PedidosFactory.getPedido(data.numpedcl).
+                        success(function (data) {
+                            data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
+                            if (data[0].totalped) {
+                                data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
+                            }
+                            $scope.datos.pedido = data[0];
+                            PedidosFactory.savePedidoLocal(data[0]);
+                            Loader.hideLoading();
+                        }).
+                        error(function (err, statusCode) {
+                            Loader.hideLoading();
+                            $scope.searchCliente = false;
+                            if (err) {
+                                var msg = err || err.message;
+                                Loader.toggleLoadingWithMessage(msg);
+                            } else {
+                                Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                            }
+                        });
+                }).
+                error(function (err, statusCode) {
+                    Loader.hideLoading();
+                    $scope.searchCliente = false;
+                    if (err) {
+                        var msg = err || err.message;
+                        Loader.toggleLoadingWithMessage(msg);
+                    } else {
+                        Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                    }
+                });
         };
 
         $scope.cancelarCabecera = function () {
-            $state.go('tab.pedidos');
+            $scope.enEdicionCabecera = false;
         };
 
         $scope.searchArticulos = function () {
@@ -272,14 +297,35 @@
         $scope.borrarPedido = function () {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Pedidos',
-                template: '¿Seguro que desea borra el pedido ' + $scope.datos.pedido.numpedcl + ' ?'
+                template: '¿Desea borra el pedido ' + $scope.datos.pedido.numpedcl + ' ?'
             });
 
             confirmPopup.then(function (res) {
                 if (res) {
-                    console.log('Seguro');
+                    $scope.cabped.numpedcl = $scope.datos.pedido.numpedcl;
+                    $scope.cabped.codforpa = $scope.datos.pedido.codforpa;
+                    $scope.cabped.codagent = $scope.datos.pedido.codagent;
+                    $scope.cabped.codtraba = $scope.user.codtraba;
+                    $scope.cabped.fecpedcl = moment($scope.datos.feccab, "DD/MM/YYYY").format("YYYY-MM-DD");
+                    $scope.cabped.codclien = $scope.datos.pedido.codclien;
+                    PedidosFactory.deleteCabPedido($scope.cabped).
+                        success(function (data) {
+                            Loader.hideLoading();
+                            Loader.toggleLoadingWithMessage("Pedido borrado");
+                            $state.go('tab.pedidos');
+                        }).
+                        error(function (err, statusCode) {
+                            Loader.hideLoading();
+                            $scope.searchCliente = false;
+                            if (err) {
+                                var msg = err || err.message;
+                                Loader.toggleLoadingWithMessage(msg);
+                            } else {
+                                Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                            }
+                        });
                 } else {
-                    console.log('Ni de coña');
+                    return;
                 }
             });
         };
