@@ -223,13 +223,16 @@
         };
 
         $scope.searchArticulos = function () {
-            if ($scope.linped.nomartic == "") {
+            if (!$scope.linped.nomartic || $scope.linped.nomartic.length < 3) {
                 $scope.searchArticulo = false;
                 return;
             }
             Loader.showLoading('Buscando articulos..');
             $scope.searchArticulo = true;
-            ArticulosFactory.getArticulos($scope.linped.nomartic).
+            ArticulosFactory.getArticulosCliente($scope.datos.pedido.codclien,
+                $scope.datos.pedido.codtarif,
+                $scope.datos.pedido.codactiv,
+                $scope.linped.nomartic).
                 success(function (data) {
                     Loader.hideLoading();
                     $scope.datos.articulos = data;
@@ -250,7 +253,7 @@
                 codartic: articulo.codartic,
                 codalmac: 1,
                 nomartic: articulo.nomartic,
-                precioar: articulo.preciove,
+                precioar: articulo.precio.importe,
                 dtoline1: 0,
                 dtoline2: 0,
             };
