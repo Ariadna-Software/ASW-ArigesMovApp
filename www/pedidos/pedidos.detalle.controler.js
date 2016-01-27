@@ -285,7 +285,7 @@
             } else {
                 // es un insert
                 $scope.linped.numpedcl = $scope.datos.pedido.numpedcl;
-                Loader.showLoading('Guardando linea..');
+                Loader.showLoading('Guardando linea...');
                 PedidosFactory.postLinPedido($scope.linped).
                     success(function (data) {
                         Loader.hideLoading();
