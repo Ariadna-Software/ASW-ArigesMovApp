@@ -45,8 +45,13 @@
             putLinPedido: function (data) {
                 return $http.put(ConfigFactory.getConfig().urlApi + '/api/pedidos/linpedido', data);
             },
-            deleteLinPedido: function (data) {
-                return $http.delete(ConfigFactory.getConfig().urlApi + '/api/pedidos/linpedido', data);
+            deleteLinPedido: function (numpedcl, numlinea) {
+                return $http.delete(ConfigFactory.getConfig().urlApi + '/api/pedidos/linpedido', {
+                    params: {
+                        "numpedcl": numpedcl,
+                        "numlinea": numlinea
+                    }
+                });
             },
             savePedidoLocal: function (pedido) {
                 LSFactory.set('pedido', pedido);

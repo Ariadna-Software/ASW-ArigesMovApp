@@ -37,7 +37,7 @@
                 </ion-item class="item-text-wrap">
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Agente:</strong></span>
-                    <span class="positive">{{user.nomagent}}</span>
+                    <span class="positive">{{datos.nomagent}}</span>
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Cliente:</strong></span>
@@ -100,6 +100,7 @@
                 <div class="col text-right"><strong>Dto1</strong></div>
                 <div class="col text-right"><strong>Dto2</strong></div>
                 <div class="col text-right"><strong>Importe</strong></div>
+                <div class="col"></div>
             </ion-item>
             <ion-item ng-repeat="linea in datos.pedido.lineas" class="item-text-wrap row">
                 <div class="col">{{linea.numlinea}}</div>
@@ -109,48 +110,68 @@
                 <div class="col text-right">{{linea.dtoline1}}</div>
                 <div class="col text-right">{{linea.dtoline2}}</div>
                 <div class="col text-right">{{linea.importel}}</div>
-            </ion-item>
-        </ion-list>
-        <!-- Lineas en edicion -->
-        <ion-list ng-show="enEdicionLinea">
-            <ion-item class="item-divider item-positive">
-                Linea [EDICIÓN]
-            </ion-item class="item-text-wrap">
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Linea:</strong></span>
-                <span> {{linped.numlinea}}</span>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Articulo:</strong></span>
-                <input type="text" ng-model="linped.nomartic" ng-change="searchArticulos()">
-            </ion-item>
-            <ion-item ng-show="searchArticulo">
-                <div class="list">
-                    <li class="item" ng-repeat="articulo in datos.articulos" ng-click="selectArticulo(articulo)">{{articulo.nomartic}}</li>
-                </div>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Precio:</strong></span>
-                <span> {{linped.precioar}}</span>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Cantidad:</strong></span>
-                <input type="text" ng-model="linped.cantidad" ng-change="cambiaCantidad()">
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label"><strong>Importe:</strong></span>
-                <span>{{linped.importel}}</span>
-            </ion-item>
-            <ion-item>
-                <div class="text-center">
-                    <button class="button" ng-click="guardarLinea()">
-                        <i class="icon ion-ios-download-outline"></i> Guardar
-                    </button>
-                    <button class="button" ng-click="cancelarLinea()">
-                        <i class="icon ion-android-close"></i> Cancelar
+                <div class="col text-center">
+                    <button class="button" ng-click="borrarLinea(linea)">
+                        <i class="icon ion-trash-b"></i>
                     </button>
                 </div>
             </ion-item>
         </ion-list>
+        <form name="linForm" novalidate="" ng-show="enEdicionLinea">
+            <!-- Lineas en edicion -->
+            <ion-list>
+                <ion-item class="item-divider item-positive">
+                    Linea [EDICIÓN]
+                </ion-item class="item-text-wrap">
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Linea:</strong></span>
+                    <span> {{linped.numlinea}}</span>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Articulo:</strong></span>
+                    <input type="text" name="articulo" ng-model="linped.nomartic" ng-change="searchArticulos()" required>
+                </ion-item>
+                <div ng-show="hayErrLin" ng-messages="linForm.articulo.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                    <div class="error" ng-message="eArticulo">
+                        <i class="ion-information-circled"></i> Debe seleccionar un articulo válido
+                    </div>
+                </div>
+                <ion-item ng-show="searchArticulo">
+                    <div class="list">
+                        <li class="item" ng-repeat="articulo in datos.articulos" ng-click="selectArticulo(articulo)">{{articulo.nomartic}}</li>
+                    </div>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Precio:</strong></span>
+                    <span> {{linped.precioar}}</span>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Cantidad:</strong></span>
+                    <input type="number" name="cantidad" ng-model="linped.cantidad" ng-change="cambiaCantidad()" required>
+                </ion-item>
+                <div ng-show="hayErrLin" ng-messages="linForm.cantidad.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                </div>                
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Importe:</strong></span>
+                    <span>{{linped.importel}}</span>
+                </ion-item>
+                <ion-item>
+                    <div class="text-center">
+                        <button class="button" ng-click="guardarLinea(linForm)">
+                            <i class="icon ion-ios-download-outline"></i> Guardar
+                        </button>
+                        <button class="button" ng-click="cancelarLinea()">
+                            <i class="icon ion-android-close"></i> Cancelar
+                        </button>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </form>
     </ion-content>
 </ion-view>

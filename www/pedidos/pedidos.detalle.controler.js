@@ -15,6 +15,7 @@
             articulo: null,
             cantidad: null,
             parnomcli: "",
+            nomagent: "",
             feccab: null,
             clientes: [],
             articulos: []
@@ -62,6 +63,7 @@
                     codclien: $scope.datos.pedido.codclien,
                     nomclien: $scope.datos.pedido.nomclien
                 };
+
             } else {
                 // si no hay pedido es que es un alta
                 $scope.datos.parnomcli = "";
@@ -77,10 +79,11 @@
                     fecpedcl: $scope.datos.pedido.fecpedcl,
                     codclien: $scope.datos.pedido.codclien
                 };
-
+                $scope.datos.nomagent = $scope.datos.pedido.nomagent;
             } else {
                 $scope.enEdicionCabecera = true;
                 $scope.enEdicionLinea = false;
+                $scope.datos.nomagent = "";
             }
         }
 
@@ -110,6 +113,7 @@
         $scope.selectCliente = function (cliente) {
             $scope.datos.parnomcli = cliente.nomclien;
             $scope.datos.cliente = cliente;
+            $scope.datos.nomagent = cliente.nomagent;
             $scope.searchCliente = false;
         };
 
@@ -275,7 +279,28 @@
             $scope.enEdicionLinea = true;
         };
 
-        $scope.guardarLinea = function () {
+        var linDatosOk = function (form) {
+            var r = true;
+            if ($scope.linped.codartic == 0) {
+                form.articulo.$error = {
+                    eArticulo: true
+                };
+                r = false;
+            }
+            return r;
+        };
+
+        $scope.guardarLinea = function (form) {
+            $scope.hayErrLin = true;
+            if (!form.$valid) {
+                return;
+            } else {
+                // comprobaciones adicionales al form
+                if (!linDatosOk(form)) {
+                    return;
+                }
+            }
+            $scope.hayErrLin = false;
             if (!$scope.linped.numlinea) {
                 $scope.linped.numlinea = 0;
             }
@@ -366,6 +391,58 @@
                 }
             });
         };
+
+        // A confirm dialog
+        $scope.borrarLinea = function (linea) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Pedidos',
+                template: '¿Borrar la linea ' + linea.numlinea + ' del pedido ' + $scope.datos.pedido.numpedcl + ' ?'
+            });
+
+            confirmPopup.then(function (res) {
+                if (res) {
+                    PedidosFactory.deleteLinPedido($scope.datos.pedido.numpedcl, linea.numlinea).
+                        success(function (data) {
+                            Loader.hideLoading();
+                            Loader.toggleLoadingWithMessage("Linea borrada");
+                            PedidosFactory.getPedido($scope.datos.pedido.numpedcl).
+                                success(function (data) {
+                                    data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
+                                    if (data[0].totalped) {
+                                        data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
+                                    }
+                                    PedidosFactory.savePedidoLocal(data[0]);
+                                    Loader.hideLoading();
+                                    $scope.load();
+                                }).
+                                error(function (err, statusCode) {
+                                    Loader.hideLoading();
+                                    $scope.searchCliente = false;
+                                    if (err) {
+                                        var msg = err || err.message;
+                                        Loader.toggleLoadingWithMessage(msg);
+                                    } else {
+                                        Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                                    }
+                                });
+                        }).
+                        error(function (err, statusCode) {
+                            Loader.hideLoading();
+                            if (err) {
+                                var msg = err || err.message;
+                                Loader.toggleLoadingWithMessage(msg);
+                            } else {
+                                Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                            }
+                        });
+                } else {
+                    return;
+                }
+            });
+        };
+
+
+
         //$scope.load();
         function round(value, decimals) {
             return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
