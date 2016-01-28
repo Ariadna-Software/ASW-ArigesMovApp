@@ -1,15 +1,18 @@
 (function () {
     'use strict';
 
-    angular.module('agsMovApp.pedidos')
-        .controller('PedidosDetalleCtrl', PedidosDetalleCtrl);
+    angular.module('agsMovApp.clientes')
+        .controller('ClipotCtrl', ClipotCtrl);
 
-    PedidosDetalleCtrl.$inject = ['$rootScope', '$scope', '$state', 'PedidosFactory', 'UserFactory', 'Loader'];
+    ClipotCtrl.$inject = ['$rootScope', '$scope', '$state', 'ClipotsFactory', 'UserFactory', 'Loader'];
 
-    function PedidosDetalleCtrl($rootScope, $scope, $state, PedidosFactory, UserFactory, Loader) {
+    function ClipotCtrl($rootScope, $scope, $state, ClipotsFactory, UserFactory, Loader) {
 
         $scope.datos = {
-            pedido: null,
+            parnom: null,
+            parnomPot: null,
+            clientes: [],
+            clipots: []
         };
 
         $scope.$on('$ionicView.enter', function (e) {
@@ -23,8 +26,10 @@
         $scope.load = function () {
             $scope.isUser = UserFactory.isUser();
             $scope.user = UserFactory.getUser();
-            $scope.datos.pedido = PedidosFactory.getPedidoLocal();
+            $scope.searchComplete = false;
+            $scope.searchCompletePot = false;
         }
+
 
         //$scope.load();
     }

@@ -23,6 +23,17 @@
                     }
                 }
             }
+        },{
+            state: 'tab.clipot',
+            config: {
+                url: '/clipot',
+                views: {
+                    'tab-clientes': {
+                        templateUrl: 'clientes/tab-clipot.html',
+                        controller: 'ClipotCtrl'
+                    }
+                }
+            }
         }, {
                 state: 'cli',
                 config: {

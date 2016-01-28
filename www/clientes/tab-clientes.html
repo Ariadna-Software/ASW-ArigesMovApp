@@ -1,25 +1,27 @@
 <ion-view view-title="AriGesMov - (c) Ariadna Software S.L.">
-	<ion-nav-bar class="bar-stable">
-		<ion-nav-back-button>
-		</ion-nav-back-button>
-	</ion-nav-bar>
-    <ion-content class="padding">
-        <ion-list ng-hide="searchComplete">
-        	<div class="item item-divider item-positive">
-        		<i class="icon ion-search"></i> Buscar cliente
-        	</div>
-        	<label class="item item-input">
-        		<input type="text" ng-model="datos.parnom" placeholder="Nombre del cliente..."/>
-        	</label>
-        	<div class="item item-body text-center">
-        		<button class="button" ng-click="searchClient()">
-        			<i class="icon ion-search"></i> Buscar
-        		</button>
-        	</div>
-        </ion-list>
+    <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="padding">
+            <ion-list ng-hide="searchComplete">
+                <div class="item item-positive">
+                    <i class="icon ion-search"></i> Buscar cliente real
+                </div>
+                <label class="item item-input">
+                    <input type="text" ng-model="datos.parnom" placeholder="Nombre del cliente..." />
+                </label>
+                <div class="item item-body text-center">
+                    <button class="button" ng-click="searchClient()">
+                        <i class="icon ion-search"></i> Buscar
+                    </button>
+                </div>
+            </ion-list>
+        </div>
         <ion-list ng-show="searchComplete">
             <ion-item class="item-positive item-button-right" ng-click="hideSearch()">
-                <i class="icon ion-funnel"></i> Resultados
+                <i class="icon ion-funnel"></i> Resultados (reales)
                 <button class="button button-positive">
                     <i class="icon ion-search"></i>
                 </button>
@@ -28,6 +30,39 @@
                 <i class="icon ion-chevron-right"></i>
                 <h4> CIF: {{cliente.nifclien}} </h4>
                 <p> {{cliente.nomclien}}</p>
+            </ion-item>
+        </ion-list>
+        <div class="padding">
+            <ion-list ng-hide="searchCompletePot">
+                <div class="item item-balanced item-button-right">
+                    <i class="icon ion-search"></i> Buscar cliente potencial
+                    <div class="buttons">
+                        <button class="button button-balanced" ng-click="crearClipot()">
+                            <i class="icon ion-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <label class="item item-input">
+                    <input type="text" ng-model="datos.parnomPot" placeholder="Nombre del cliente potencial..." />
+                </label>
+                <div class="item item-body text-center">
+                    <button class="button" ng-click="searchClientPot()">
+                        <i class="icon ion-search"></i> Buscar
+                    </button>
+                </div>
+            </ion-list>
+        </div>
+        <ion-list ng-show="searchCompletePot">
+            <ion-item class="item-balanced item-button-right" ng-click="hideSearchPot()">
+                <i class="icon ion-funnel"></i> Resultados (potenciales)
+                <button class="button button-balanced">
+                    <i class="icon ion-search"></i>
+                </button>
+            </ion-item>
+            <ion-item ng-repeat="clipot in datos.clipots" class="item-text-wrap item-icon-right" href="#" ng-click="goClipot(clipot)">
+                <i class="icon ion-chevron-right"></i>
+                <h4> CIF: {{clipot.nifclien}} </h4>
+                <p> {{clipot.nomclien}}</p>
             </ion-item>
         </ion-list>
     </ion-content>
