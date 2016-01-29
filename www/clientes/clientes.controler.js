@@ -71,26 +71,31 @@
         $scope.hideSearch = function () {
             $scope.searchComplete = false;
             $scope.parnom = null;
-        }
+        };
 
         $scope.hideSearchPot = function () {
             $scope.searchCompletePot = false;
             $scope.parnomPot = null;
-        }
+        };
 
         $scope.goCliente = function (cliente) {
             // guardar el cliente en local
             ClientesFactory.saveClienteLocal(cliente);
             // ir a la vista adecuada
             $state.go('cli.datos');
-        }
+        };
 
         $scope.goClipot = function (clipot) {
             // guardar el cliente en local
             ClipotsFactory.saveClipotLocal(clipot);
             // ir a la vista adecuada
             $state.go('tab.clipot');
-        }
+        };
+        
+        $scope.crearClipot = function(){
+            ClipotsFactory.saveClipotLocal(null);
+            $state.go('tab.clipot');
+        };
 
         //$scope.load();
     }

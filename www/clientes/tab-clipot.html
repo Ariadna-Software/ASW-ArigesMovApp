@@ -73,15 +73,15 @@
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Domicilio:</strong></span>
-                    <input type="text" name="domclien" ng-model="datos.clipot.domclien" required>
+                    <input type="text" name="domclien" ng-model="datos.clipot.domclien">
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Cod. Postal:</strong></span>
-                    <input type="text" name="domclien" ng-model="datos.clipot.codpobla" required>
+                    <input type="text" name="domclien" ng-model="datos.clipot.codpobla">
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Provincia:</strong></span>
-                    <input type="text" name="domclien" ng-model="datos.clipot.proclien" required>
+                    <input type="text" name="domclien" ng-model="datos.clipot.proclien">
                 </ion-item>
 
                 <ion-item class="item-divider text-center">
@@ -89,19 +89,19 @@
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Persona:</strong></span>
-                    <input type="text" name="perclie1" ng-model="datos.clipot.perclie1" required>
+                    <input type="text" name="perclie1" ng-model="datos.clipot.perclie1">
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Teléfono:</strong></span>
-                    <input type="text" name="telclie1" ng-model="datos.clipot.telclie1" required>
+                    <input type="text" name="telclie1" ng-model="datos.clipot.telclie1">
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Fax:</strong></span>
-                    <input type="text" name="faxclie1" ng-model="datos.clipot.faxclie1" required>
+                    <input type="text" name="faxclie1" ng-model="datos.clipot.faxclie1">
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Email:</strong></span>
-                    <input type="email" name="maiclie1" ng-model="datos.clipot.maiclie1" required>
+                    <input type="email" name="maiclie1" ng-model="datos.clipot.maiclie1">
                 </ion-item>
                 <div ng-show="hayErrCli" ng-messages="cliForm.maiclie1.$error" role="alert" ng-messages-multiple>
                     <div class="error" ng-message="email">
@@ -115,19 +115,19 @@
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Persona:</strong></span>
-                    <input type="text" name="perclie2" ng-model="datos.clipot.perclie2" required>
+                    <input type="text" name="perclie2" ng-model="datos.clipot.perclie2">
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Teléfono:</strong></span>
-                    <input type="text" name="telclie2" ng-model="datos.clipot.telclie2" required>
+                    <input type="text" name="telclie2" ng-model="datos.clipot.telclie2">
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Fax:</strong></span>
-                    <input type="text" name="faxclie2" ng-model="datos.clipot.faxclie2" required>
+                    <input type="text" name="faxclie2" ng-model="datos.clipot.faxclie2">
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Email:</strong></span>
-                    <input type="email" name="maiclie2" ng-model="datos.clipot.maiclie2" required>
+                    <input type="email" name="maiclie2" ng-model="datos.clipot.maiclie2">
                 </ion-item>
                 <div ng-show="hayErrCli" ng-messages="cliForm.maiclie2.$error" role="alert" ng-messages-multiple>
                     <div class="error" ng-message="email">
@@ -140,10 +140,10 @@
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Web:</strong></span>
-                    <input type="email" name="wwwclien" ng-model="datos.clipot.wwwclien" required>
+                    <input type="url" name="wwwclien" ng-model="datos.clipot.wwwclien">
                 </ion-item>
-                <div ng-show="hayErrCli" ng-messages="cliForm.wwwcli.$error" role="alert" ng-messages-multiple>
-                    <div class="error" ng-message="email">
+                <div ng-show="hayErrCli" ng-messages="cliForm.wwwclien.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="url">
                         <i class="ion-information-circled"></i> Debe introducir una url válida
                     </div>
                 </div>
