@@ -4,7 +4,165 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-        Esto sera un cliente potencial
-        <a href="#/tab/clientes">Volviendo</a>
+        <ion-list>
+            <form name="cliForm" novalidate="">
+                <ion-item class="item-balanced item-button-right">
+                    Cliente potencial [EDICIÓN]
+                    <div class="buttons">
+                        <button class="button button-balanced" ng-click="borrarClipot()">
+                            <i class="icon ion-trash-b"></i>
+                        </button>
+                        <button class="button button-balanced" ng-click="cancelarClipot()">
+                            <i class="icon ion-android-exit"></i>
+                        </button>
+                    </div>
+                </ion-item>
+                <ion-item class="item-divider text-center">
+                    DATOS BÁSICOS
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Codigo:</strong></span>
+                    <span class="positive">{{datos.clipot.codclien}}</span>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Nombre:</strong></span>
+                    <input type="text" name="nomclien" ng-model="datos.clipot.nomclien" required>
+                </ion-item>
+                <div ng-show="hayErrCli" ng-messages="cliForm.nomclien.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                </div>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Nombre comercial:</strong></span>
+                    <input type="text" name="nomcomer" ng-model="datos.clipot.nomcomer" required>
+                </ion-item>
+                <div ng-show="hayErrCli" ng-messages="cliForm.nomcomer.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                </div>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>NIF / CIF:</strong></span>
+                    <input type="text" name="nifclien" ng-model="datos.clipot.nifclien" required>
+                </ion-item>
+                <div ng-show="hayErrCli" ng-messages="cliForm.nifclien.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                </div>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Actividad:</strong></span>
+                    <input type="text" name="actividad" ng-model="datos.clipot.nomactiv" ng-change="searchActividades()" required>
+                </ion-item>
+                <div ng-show="hayErrCli" ng-messages="cliForm.actividad.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                    <div class="error" ng-message="eActividad">
+                        <i class="ion-information-circled"></i> Debe seleccionar una actividad válida
+                    </div>
+                </div>
+                <ion-item ng-show="searchActividad">
+                    <div class="list">
+                        <li class="item" ng-repeat="actividad in datos.actividades" ng-click="selectActividad(actividad)">{{actividad.nomactiv}}</li>
+                    </div>
+                </ion-item>
+                <ion-item class="item-divider text-center">
+                    DIRECCIÓN
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Domicilio:</strong></span>
+                    <input type="text" name="domclien" ng-model="datos.clipot.domclien" required>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Cod. Postal:</strong></span>
+                    <input type="text" name="domclien" ng-model="datos.clipot.codpobla" required>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Provincia:</strong></span>
+                    <input type="text" name="domclien" ng-model="datos.clipot.proclien" required>
+                </ion-item>
+
+                <ion-item class="item-divider text-center">
+                    CONTACTO ADMINISTRATIVO
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Persona:</strong></span>
+                    <input type="text" name="perclie1" ng-model="datos.clipot.perclie1" required>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Teléfono:</strong></span>
+                    <input type="text" name="telclie1" ng-model="datos.clipot.telclie1" required>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Fax:</strong></span>
+                    <input type="text" name="faxclie1" ng-model="datos.clipot.faxclie1" required>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Email:</strong></span>
+                    <input type="email" name="maiclie1" ng-model="datos.clipot.maiclie1" required>
+                </ion-item>
+                <div ng-show="hayErrCli" ng-messages="cliForm.maiclie1.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="email">
+                        <i class="ion-information-circled"></i> Debe introducir un email válido
+                    </div>
+                </div>
+
+
+                <ion-item class="item-divider text-center">
+                    CONTACTO COMERCIAL
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Persona:</strong></span>
+                    <input type="text" name="perclie2" ng-model="datos.clipot.perclie2" required>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Teléfono:</strong></span>
+                    <input type="text" name="telclie2" ng-model="datos.clipot.telclie2" required>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Fax:</strong></span>
+                    <input type="text" name="faxclie2" ng-model="datos.clipot.faxclie2" required>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Email:</strong></span>
+                    <input type="email" name="maiclie2" ng-model="datos.clipot.maiclie2" required>
+                </ion-item>
+                <div ng-show="hayErrCli" ng-messages="cliForm.maiclie2.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="email">
+                        <i class="ion-information-circled"></i> Debe introducir un email válido
+                    </div>
+                </div>
+
+                <ion-item class="item-divider text-center">
+                    OTROS
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Web:</strong></span>
+                    <input type="email" name="wwwclien" ng-model="datos.clipot.wwwclien" required>
+                </ion-item>
+                <div ng-show="hayErrCli" ng-messages="cliForm.wwwcli.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="email">
+                        <i class="ion-information-circled"></i> Debe introducir una url válida
+                    </div>
+                </div>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Observaciones:</strong></span>
+                    <textarea rows="4" name="observac" ng-model="datos.clipot.observac"></textarea>
+                </ion-item>
+
+                <ion-item>
+                    <div class="text-center">
+                        <button class="button" ng-click="guardarClipot(cliForm)">
+                            <i class="icon ion-ios-download-outline"></i> Guardar
+                        </button>
+                        <button class="button" ng-click="cancelarClipot()">
+                            <i class="icon ion-android-close"></i> Cancelar
+                        </button>
+                    </div>
+                </ion-item>
+            </form>
+        </ion-list>
     </ion-content>
 </ion-view>
