@@ -56,9 +56,16 @@
                     $scope.datos.cobros = data;
                     // formateo de los datos numéricos y fechas
                     for (var i = 0; i < $scope.datos.cobros.length; i++) {
+                        var vencimiento = new Date($scope.datos.cobros[i].fechavenci);
                         $scope.datos.cobros[i].fechavenci = moment(new Date($scope.datos.cobros[i].fechavenci)).format('DD/MM/YYYY');
                         $scope.datos.cobros[i].fechafact = moment(new Date($scope.datos.cobros[i].fechafact)).format('DD/MM/YYYY');
                         $scope.datos.cobros[i].total = numeral($scope.datos.cobros[i].total).format('0,0.00 $');
+                        // marcar como vencido
+                        if (new Date() >= vencimiento){
+                            $scope.datos.cobros[i].vencido = true;
+                        }else{
+                            $scope.datos.cobros[i].vencido = false;
+                        }
                     }
                 }).
                 error(function (err, statusCode) {

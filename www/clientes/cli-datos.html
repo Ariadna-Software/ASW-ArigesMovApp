@@ -76,19 +76,19 @@
             <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap item-icon-right" ng-click="goCobro(cobro)">
                 <i class="icon ion-chevron-right"></i>
                 <div class="row">
-                    <div class="col">
+                    <div class="col" ng-class="{assertive: cobro.vencido}">
                         {{cobro.fechavenci}}
                     </div>
-                    <div class="col">
+                    <div class="col" ng-class="{assertive: cobro.vencido}">
                        {{cobro.nomforpa}}
                     </div>
-                    <div class="col">
+                    <div class="col" ng-class="{assertive: cobro.vencido}">
                         {{cobro.numfact}}
                     </div>                        
-                    <div class="col">
+                    <div class="col" ng-class="{assertive: cobro.vencido}">
                         {{cobro.fechafact}}
                     </div>
-                    <div class="col text-right">
+                    <div class="col text-right" ng-class="{assertive: cobro.vencido}">
                         {{cobro.total}}
                     </div>
                 </div>
