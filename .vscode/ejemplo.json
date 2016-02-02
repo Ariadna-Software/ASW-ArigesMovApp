@@ -13,8 +13,8 @@
     "digcontr": "38",
     "cuentaba": "0001833271",
     "ctabanc2": null,
-    "fecultco": "2016-01-31T23:00:00.000Z",
-    "impcobro": null,
+    "fecultco": "2016-07-31T22:00:00.000Z",
+    "impcobro": 0,
     "emitdocum": 0,
     "recedocu": 0,
     "contdocu": 0,
@@ -62,18 +62,5 @@
     "fecsiniestro": null,
     "fecejecutiva": null,
     "iban": "ES29",
-    "lineas": [
-        {
-            "numserie": "A",
-            "codfaccl": 1600027,
-            "fecfaccl": "2016-01-14T23:00:00.000Z",
-            "numorden": 1,
-            "id": 1,
-            "codagent": null,
-            "fecha": "2016-01-31T23:00:00.000Z",
-            "importe": 14.2,
-            "codforpa": 5,
-            "observa": "Observaciones"
-        }
-    ]
+    "lineas": []
 }

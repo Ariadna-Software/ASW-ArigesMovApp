@@ -53,6 +53,19 @@
                 fecultco: moment(new Date()).format('YYYY-MM-DD'),
                 impcobro: 0
             };
+            $scope.lincob = {
+                numserie: 0,
+                codfaccl: 0,
+                fecfaccl: 0,
+                numorden: 0,
+                id: 0,
+                fecha: "",
+                importe: 0,
+                codforpa: 0,
+                codagent: null,
+                observa: ""
+            };
+            $scope.enEdicionLinea = false;
             // cargar el cobro extendido
             $scope.getCobroext($scope.datos.cobro);
         };
