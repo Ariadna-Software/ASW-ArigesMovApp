@@ -42,6 +42,7 @@
                 fecfaccl: moment($scope.datos.cobro.fecfaccl,'DD/MM/YYYY').format('YYYY-MM-DD'),
                 numorden: $scope.datos.cobro.numorden,
                 codforpa: $scope.datos.cobro.codforpa,
+                nomforpa: $scope.datos.cobro.nomforpa,
                 fecultco: moment(new Date()).format('YYYY-MM-DD'),
                 impcobro: 0
             };
