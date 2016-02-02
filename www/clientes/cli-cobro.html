@@ -7,9 +7,9 @@
     <ion-content class="padding">
         <ion-list>
             <ion-item class="item-divider item-positive">
-                Cobros
+                Cobro
             </ion-item>
-            <ion-item>
+            <ion-item class="item-text-wrap">
                 <div>
                     <strong>Fecha ven.:</strong> {{datos.cobro.fechavenci}}
                     <strong>Tipo cobro:</strong> {{datos.cobro.nomforpa}}
@@ -20,11 +20,101 @@
                 </div>
                 <div>
                     <strong>Importe:</strong> {{datos.cobro.total}}
+                    <strong>Cobrado:</strong> {{datos.cobroext.impcobro}}
                 </div>
             </ion-item>
         </ion-list>
-        <ion-list>
-            
+        <!-- Lineas normal -->
+        <ion-list ng-hide="enEdicionLinea">
+            <ion-item class="item-positive item-button-right">
+                Pagos
+                <button class="button button-positive" ng-click="crearLinea()">
+                    <i class="icon ion-plus"></i>
+                </button>
+            </ion-item>
+            <ion-item class="item-text-wrap row">
+                <div class="col"><strong>Id</strong></div>
+                <div class="col"><strong>Agente</strong></div>
+                <div class="col"><strong>Fecha</strong></div>
+                <div class="col"><strong>F.Pago</strong></div>
+                <div class="col text-right"><strong>Importe</strong></div>
+                <div class="col"><strong>Observaciones</strong></div>
+                <div class="col"></div>
+            </ion-item>
+            <ion-item ng-repeat="linea in datos.cobroext.lineas" class="item-text-wrap row">
+                <div class="col">{{linea.id}}</div>
+                <div class="col">{{linea.nomagent}}</div>
+                <div class="col">{{linea.fecha}}</div>
+                <div class="col">{{linea.nomforpa}}</div>
+                <div class="col text-right">{{linea.importe}}</div>
+                <div class="col">{{linea.observa}}</div>
+                <div class="col text-center">
+                    <button class="button" ng-click="borrarLinea(linea)">
+                        <i class="icon ion-trash-b"></i>
+                    </button>
+                </div>
+            </ion-item>
         </ion-list>
+        <form name="linForm" novalidate="" ng-show="enEdicionLinea">
+            <!-- Lineas en edicion -->
+            <ion-list>
+                <ion-item class="item-divider item-positive">
+                    Linea [EDICIÓN]
+                </ion-item class="item-text-wrap">
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Fecha:</strong></span>
+                    <input type="text" name="fecha" ng-model="datos.fecha" required>
+                </ion-item>
+                <div ng-show="hayErrLin" ng-messages="linForm.fecha.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                    <div class="error" ng-message="eFecha">
+                        <i class="ion-information-circled"></i> Introduzca una fecha válida (DD/MM/AAAA)
+                    </div>
+                </div>                
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Forma Pago:</strong></span>
+                    <input type="text" name="fpago" ng-model="datos.nomforpa" ng-change="searchFPago()" required>
+                </ion-item>
+                <div ng-show="hayErrLin" ng-messages="linForm.fpago.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                    <div class="error" ng-message="eFPago">
+                        <i class="ion-information-circled"></i> Debe seleccionar una forma de pago válida
+                    </div>
+                </div>
+                <ion-item ng-show="searchFPago">
+                    <div class="list">
+                        <li class="item" ng-repeat="fpago in datos.fpagos" ng-click="selectFPago(fpago)">{{fpago.nomforpa}}</li>
+                    </div>
+                </ion-item>
+                <ion-item class="item-input">
+                    <span class="input-label"><strong>Importe:</strong></span>
+                    <input type="number" name="importe" ng-model="lincob.importe" required>
+                </ion-item>
+                <div ng-show="hayErrLin" ng-messages="linForm.importe.$error" role="alert" ng-messages-multiple>
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> Este campo es obligatorio
+                    </div>
+                </div>
+               <ion-item class="item-input">
+                    <span class="input-label"><strong>Observaciones:</strong></span>
+                    <textarea rows="4" name="observac" ng-model="datos.lincob.observa"></textarea>
+                </ion-item>                                
+                <ion-item>
+                    <div class="text-center">
+                        <button class="button" ng-click="guardarLinea(linForm)">
+                            <i class="icon ion-ios-download-outline"></i> Guardar
+                        </button>
+                        <button class="button" ng-click="cancelarLinea()">
+                            <i class="icon ion-android-close"></i> Cancelar
+                        </button>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </form>
+        
     </ion-content>
 </ion-view>
