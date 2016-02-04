@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
     angular.module('agsMovApp.clientes')
@@ -29,7 +29,7 @@
             impcobro: 111.55
         };
 
-        $scope.$on('$ionicView.enter', function (e) {
+        $scope.$on('$ionicView.enter', function(e) {
             if (!UserFactory.isUser()) {
                 Loader.toggleLoadingWithMessage("Debe entrar con un usuario");
                 $state.go('tab.inicio');
@@ -37,7 +37,7 @@
             $scope.load();
         });
 
-        $scope.load = function () {
+        $scope.load = function() {
             $scope.isUser = UserFactory.isUser();
             $scope.user = UserFactory.getUser();
             $scope.datos.cliente = ClientesFactory.getClienteLocal();
@@ -70,35 +70,24 @@
             $scope.getCobroext($scope.datos.cobro);
         };
 
-        $scope.getCobroext = function (cobro) {
+        $scope.getCobroext = function(cobro) {
             // Primero obtener la cabecera
             Loader.showLoading('Obteniendo cobro...');
             CobrosFactory.getCobro(cobro.numserie, cobro.codfaccl, cobro.fecfaccl, cobro.numorden).
-                success(function (data) {
+            success(function(data) {
+                Loader.hideLoading();
+                $scope.datos.cobroext = data;
+                // al estar guardado en la base de datos lo podemos obtener
+                CobrosFactory.getLinsCobro(cobro.numserie, cobro.codfaccl, cobro.fecfaccl, cobro.numorden).
+                success(function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        data[i].fecha = moment(data[i].fecha).format('DD/MM/YYYY');
+                    }
+                    $scope.datos.cobroext.lineas = data;
+                    CobrosFactory.saveCobroextLocal($scope.datos.cobroext);
                     Loader.hideLoading();
-                    $scope.datos.cobroext = data;
-                    // al estar guardado en la base de datos lo podemos obtener
-                    CobrosFactory.getLinsCobro(cobro.numserie, cobro.codfaccl, cobro.fecfaccl, cobro.numorden).
-                        success(function (data) {
-                            for (var i = 0; i < data.length; i++) {
-                                data[i].fecha = moment(data[i].fecha).format('DD/MM/YYYY');
-                            }
-                            $scope.datos.cobroext.lineas = data;
-                            CobrosFactory.saveCobroextLocal($scope.datos.cobroext);
-                            Loader.hideLoading();
-                        }).
-                        error(function (err, statusCode) {
-                            Loader.hideLoading();
-                            $scope.searchCliente = false;
-                            if (err) {
-                                var msg = err || err.message;
-                                Loader.toggleLoadingWithMessage(msg);
-                            } else {
-                                Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                            }
-                        });
                 }).
-                error(function (err, statusCode) {
+                error(function(err, statusCode) {
                     Loader.hideLoading();
                     $scope.searchCliente = false;
                     if (err) {
@@ -108,9 +97,20 @@
                         Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
                     }
                 });
+            }).
+            error(function(err, statusCode) {
+                Loader.hideLoading();
+                $scope.searchCliente = false;
+                if (err) {
+                    var msg = err || err.message;
+                    Loader.toggleLoadingWithMessage(msg);
+                } else {
+                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                }
+            });
         };
         //$scope.load();
-        $scope.crearLinea = function () {
+        $scope.crearLinea = function() {
             $scope.lincob = {
                 numserie: 0,
                 codfaccl: 0,
@@ -126,11 +126,11 @@
             $scope.enEdicionLinea = true;
         };
 
-        $scope.cancelarLinea = function () {
+        $scope.cancelarLinea = function() {
             $scope.enEdicionLinea = false;
         };
 
-        var linDatosOk = function (form) {
+        var linDatosOk = function(form) {
             var r = true;
             if ($scope.lincob.codforpa == 0) {
                 form.fpago.$error = {
@@ -147,7 +147,7 @@
             return r;
         };
 
-        $scope.guardarLinea = function (form) {
+        $scope.guardarLinea = function(form) {
             $scope.hayErrLin = true;
             if (!form.$valid) {
                 return;
@@ -163,7 +163,7 @@
             }
             if ($scope.lincob.id != 0) {
                 // es un update
- 
+
             } else {
                 // es un insert
                 $scope.lincob.codagent = $scope.user.codagent;
@@ -174,47 +174,21 @@
                 $scope.lincob.fecha = moment($scope.datos.fecha, 'DD/MM/YYYY').format('YYYY-MM-DD');
                 Loader.showLoading('Guardando linea...');
                 CobrosFactory.postLinCobro($scope.lincob).
-                    success(function (data) {
-                        Loader.hideLoading();
-                        $scope.enEdicionLinea = false;
-                        var cobro = {
-                            numserie: $scope.lincob.numserie,
-                            codfaccl: $scope.lincob.codfaccl,
-                            fecfaccl: $scope.lincob.fecfaccl,
-                            numorden: $scope.lincob.numorden
-                        };
-                        // al estar guardado en la base de datos lo podemos obtener
-                        $scope.getCobroext(cobro);
-                    }).
-                    error(function (err, statusCode) {
-                        Loader.hideLoading();
-                        $scope.searchCliente = false;
-                        if (err) {
-                            var msg = err || err.message;
-                            Loader.toggleLoadingWithMessage(msg);
-                        } else {
-                            Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                        }
-                    });
-            }
-
-        };
-
-        $scope.searchFPago = function () {
-            if (!$scope.datos.nomforpa) {
-                $scope.searchFPago = false;
-                return;
-            }
-            Loader.showLoading('Buscando formas de pago..');
-            $scope.searchFPago = true;
-            FPagoFactory.getFPagos($scope.datos.nomforpa).
-                success(function (data) {
+                success(function(data) {
                     Loader.hideLoading();
-                    $scope.datos.fpagos = data;
+                    $scope.enEdicionLinea = false;
+                    var cobro = {
+                        numserie: $scope.lincob.numserie,
+                        codfaccl: $scope.lincob.codfaccl,
+                        fecfaccl: $scope.lincob.fecfaccl,
+                        numorden: $scope.lincob.numorden
+                    };
+                    // al estar guardado en la base de datos lo podemos obtener
+                    $scope.getCobroext(cobro);
                 }).
-                error(function (err, statusCode) {
+                error(function(err, statusCode) {
                     Loader.hideLoading();
-                    $scope.searchFPago = false;
+                    $scope.searchCliente = false;
                     if (err) {
                         var msg = err || err.message;
                         Loader.toggleLoadingWithMessage(msg);
@@ -222,47 +196,98 @@
                         Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
                     }
                 });
+            }
+
         };
 
-        $scope.selectFPago = function (fpago) {
+        $scope.searchFPago = function() {
+            if (!$scope.datos.nomforpa) {
+                $scope.searchFPago = false;
+                return;
+            }
+            Loader.showLoading('Buscando formas de pago..');
+            $scope.searchFPago = true;
+            FPagoFactory.getFPagos($scope.datos.nomforpa).
+            success(function(data) {
+                Loader.hideLoading();
+                $scope.datos.fpagos = data;
+            }).
+            error(function(err, statusCode) {
+                Loader.hideLoading();
+                $scope.searchFPago = false;
+                if (err) {
+                    var msg = err || err.message;
+                    Loader.toggleLoadingWithMessage(msg);
+                } else {
+                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                }
+            });
+        };
+
+        $scope.selectFPago = function(fpago) {
             $scope.lincob.codforpa = fpago.codforpa;
             $scope.datos.nomforpa = fpago.nomforpa;
             $scope.datos.fpago = fpago;
             $scope.searchFPago = false;
         };
-        
+
         // A confirm dialog
-        $scope.borrarLinea = function (linea) {
+        $scope.borrarLinea = function(linea) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Pagos',
                 template: '¿Borrar la linea ' + linea.id + ' del cobro ' + linea.fecha + ' ?'
             });
 
-            confirmPopup.then(function (res) {
+            confirmPopup.then(function(res) {
                 if (res) {
                     CobrosFactory.deleteLinCobro(linea.numserie, linea.codfaccl, moment(linea.fecfaccl).format('YYYY-MM-DD'), linea.numorden, linea.id, linea.importe).
-                        success(function (data) {
-                            Loader.hideLoading();
-                            Loader.toggleLoadingWithMessage("Linea borrada");
-                            var cobro = {
-                                numserie: linea.numserie,
-                                codfaccl: linea.codfaccl,
-                                fecfaccl: linea.fecfaccl,
-                                numorden: linea.numorden
-                            };
-                            $scope.getCobroext($scope.datos.cobro);
-                        }).
-                        error(function (err, statusCode) {
-                            Loader.hideLoading();
-                            if (err) {
-                                var msg = err || err.message;
-                                Loader.toggleLoadingWithMessage(msg);
-                            } else {
-                                Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                            }
-                        });
+                    success(function(data) {
+                        Loader.hideLoading();
+                        Loader.toggleLoadingWithMessage("Linea borrada");
+                        var cobro = {
+                            numserie: linea.numserie,
+                            codfaccl: linea.codfaccl,
+                            fecfaccl: linea.fecfaccl,
+                            numorden: linea.numorden
+                        };
+                        $scope.getCobroext($scope.datos.cobro);
+                    }).
+                    error(function(err, statusCode) {
+                        Loader.hideLoading();
+                        if (err) {
+                            var msg = err || err.message;
+                            Loader.toggleLoadingWithMessage(msg);
+                        } else {
+                            Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                        }
+                    });
                 } else {
                     return;
+                }
+            });
+        };
+
+        // Ver una factura
+        $scope.verFactura = function(numserie, cabfaccl, fecfaccl) {
+            // la fecha de factura hay que cambiarla de formato
+            // DD/MM/YYYY --> YYYY-MM-DD
+            fecfaccl = moment(fecfaccl, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            Loader.showLoading('Buscando factura..');
+            ClientesFactory.getFacturaNumserie(numserie, cabfaccl, fecfaccl).
+            success(function(data) {
+                Loader.hideLoading();
+                ClientesFactory.saveFacturaLocal(data);
+                // ir a la vista adecuada
+                $state.go('cli.facturasDetalle');
+
+            }).
+            error(function(err, statusCode) {
+                Loader.hideLoading();
+                if (err) {
+                    var msg = err || err.message;
+                    Loader.toggleLoadingWithMessage(msg);
+                } else {
+                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
                 }
             });
         };

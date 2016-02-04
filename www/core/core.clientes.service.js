@@ -79,6 +79,15 @@
             getFacturas: function(codclien) {
                 return $http.get(ConfigFactory.getConfig().urlApi + '/api/facturas/cliente/' + codclien);
             },
+            getFacturaNumserie: function(numserie, cabfaccl, fecfaccl) {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/facturas/facserie/' , {
+                    params: {
+                        "numserie": numserie,
+                        "cabfaccl": cabfaccl,
+                        "fecfaccl": fecfaccl
+                    }
+                });
+            },            
             getPreciosEspeciales: function(codclien) {
                 return $http.get(ConfigFactory.getConfig().urlApi + '/api/articulos/precios-especiales/' + codclien);
             }

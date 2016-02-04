@@ -9,7 +9,7 @@
             <ion-item class="item-divider item-positive">
                 Cobro
             </ion-item>
-            <ion-item class="item-text-wrap">
+            <ion-item class="item-text-wrap item-button-right">
                 <div>
                     <strong>Fecha ven.:</strong> {{datos.cobro.fechavenci}}
                     <strong>Tipo cobro:</strong> {{datos.cobro.nomforpa}}
@@ -22,6 +22,9 @@
                     <strong>Pendiente:</strong> {{datos.cobroext.impvenci + datos.cobroext.gastos - datos.cobroext.impcobro}}
                     <strong>Cobrado:</strong> {{datos.cobroext.impcobro}}
                 </div>
+                <button class="button" ng-click="verFactura(datos.cobro.numserie, datos.cobro.codfaccl, datos.cobro.fechafact)">
+                    <i class="icon ion-clipboard"></i>
+                </button>
             </ion-item>
         </ion-list>
         <!-- Lineas normal -->
@@ -115,6 +118,5 @@
                 </ion-item>
             </ion-list>
         </form>
-
     </ion-content>
 </ion-view>
