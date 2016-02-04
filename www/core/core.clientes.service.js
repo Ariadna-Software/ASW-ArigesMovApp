@@ -12,7 +12,8 @@
                 return $http.get(ConfigFactory.getConfig().urlApi + '/api/clientes/clientes-agente', {
                     params: {
                         "agente": agente,
-                        "parnom": parnom
+                        "parnom": parnom,
+                        "porNomComer": ConfigFactory.getConfig().porNomComer
                     }
                 })
             },

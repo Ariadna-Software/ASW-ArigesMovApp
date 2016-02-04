@@ -10,12 +10,17 @@
         var config = ConfigFactory.getConfig();
         if (!config) {
             config = {
-                urlApi: ""
+                urlApi: "",
+                porNomComer: false
             }
+        }
+        if (!config.porNomComer){
+            config.porNomComer = false;
         }
         $scope.config = config;
         $scope.setConfig = function() {
             ConfigFactory.setConfig($scope.config);
+            $state.go('tab.inicio');
         }
     }
 

@@ -1,11 +1,20 @@
 <ion-view view-title="AiGesMov - (c) Ariadna Software S.L.">
     <ion-content class="padding">
-        <div class="list">
-            <label class="item item-input item-floating-label">
-                <span class="input-label">URL Servicio API</span>
-                <input type="text" placeholder="URL Servicio API" ng-model="config.urlApi">
-            </label>
-        </div>
+        <ion-list>
+            <ion-item class="item-input item-stacked-label">
+                <span class="input-label"><strong>URL servicio API:</strong></span>
+                <input type="text" ng-model="config.urlApi">
+            </ion-item>
+            <ion-item class="item-toogle">
+                Buscar por nombre comercial
+                <label class="toggle toggle-positive">
+                    <input type="checkbox" ng-model="config.porNomComer">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </ion-item>
+        </ion-list>
         <button class="button button-block" ng-click="setConfig()">
             Aceptar
         </button>

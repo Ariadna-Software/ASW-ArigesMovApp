@@ -53,7 +53,9 @@
                 </div>
                 <ion-item ng-show="searchCliente">
                     <div class="list">
-                        <li class="item" ng-repeat="cliente in datos.clientes" ng-click="selectCliente(cliente)">{{cliente.nomclien}}</li>
+                        <li class="item" ng-repeat="cliente in datos.clientes" ng-click="selectCliente(cliente)">
+                            {{cliente.nomclien}} / {{cliente.nomcomer}}
+                        </li>
                     </div>
                 </ion-item>
                 <ion-item class="item-input">
@@ -156,7 +158,7 @@
                     <div class="error" ng-message="required">
                         <i class="ion-information-circled"></i> Este campo es obligatorio
                     </div>
-                </div>                
+                </div>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Importe:</strong></span>
                     <span>{{linped.importel}}</span>
