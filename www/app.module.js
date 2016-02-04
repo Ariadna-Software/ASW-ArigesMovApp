@@ -23,6 +23,7 @@
 			'agsMovApp.map',
             'agsMovApp.proveedores',
             'agsMovApp.articulos',
-            'agsMovApp.pedidos'
+            'agsMovApp.pedidos',
+            'agsMovApp.cobros'
 		]);
 })();

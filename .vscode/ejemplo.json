@@ -1,1 +1,14 @@
-{"fechavenci":"15/03/2016","numserie":"A","codfaccl":1600027,"numorden":1,"numfact":"A1600027","fechafact":"15/01/2016","codforpa":1,"nomforpa":"RECIBO BANCARIO 60 DIAS","impcobro":30.5,"total":"325,60 €","vencido":false,"$$hashKey":"object:154"}
+{
+    "fechavenci": "15/03/2016",
+    "numserie": "A",
+    "codfaccl": 1600027,
+    "numorden": 1,
+    "numfact": "A1600027",
+    "fechafact": "15/01/2016",
+    "codforpa": 1,
+    "nomforpa": "RECIBO BANCARIO 60 DIAS",
+    "impcobro": 30.5,
+    "total": "325,60 €",
+    "vencido": false,
+    "$$hashKey": "object:154"
+}

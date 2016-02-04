@@ -2,45 +2,27 @@
     'use strict';
 
     angular
-        .module('agsMovApp.pedidos')
+        .module('agsMovApp.cobros')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
 
     function appRun(routerHelper) {
-        routerHelper.configureStates(getStates(), '/tab/pedidos');
+        routerHelper.configureStates(getStates(), '/tab/cobros');
     }
 
     function getStates() {
         return [{
-            state: 'tab.pedidos',
+            state: 'tab.cobros',
             config: {
-                url: '/pedidos',
+                url: '/cobros',
                 views: {
-                    'tab-pedidos': {
-                        templateUrl: 'pedidos/tab-pedidos.html',
-                        controller: 'PedidosCtrl'
+                    'tab-cobros': {
+                        templateUrl: 'cobros/tab-cobros.html',
+                        controller: 'CobrosCtrl'
                     }
                 }
             }
-        }, {
-                state: 'ped',
-                config: {
-                    url: '/ped',
-                    abstract: true,
-                    templateUrl: 'pedidos/ped-menu.html'
-                }
-            }, {
-                state: 'ped.detalle',
-                config: {
-                    url: '/detalle',
-                    views: {
-                        'menuContent': {
-                            templateUrl: 'pedidos/ped-detalle.html',
-                            controller: 'PedidosDetalleCtrl'
-                        }
-                    }
-                }
-            }];
+        }];
     }
 })();

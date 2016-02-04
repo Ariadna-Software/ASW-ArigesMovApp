@@ -3,28 +3,33 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
-        <ion-nav-buttons side="right">
-        <button class="button" ng-click="crearPedido()">
-            <i class="icon ion-plus"></i>
-        </button>
-    </ion-nav-buttons>
     <ion-content class="padding">
         <ion-list>
             <div class="item item-divider item-positive">
-                Cobros
+                Cobros realizados
             </div>
-            <ion-item ng-repeat="pedido in datos.pedidos" class="item-text-wrap item-icon-right" href="#" ng-click="goPedido(pedido)">
-                <i class="icon ion-chevron-right"></i>
-                <div>
-                    <strong>Numero: </strong>{{pedido.numpedcl}}
-                </div>
-                <div>
-                    <strong>Agente: </strong>{{pedido.nomagent}}
-                    <strong>Cliente: </strong>{{pedido.nomclien}}
-                </div>
-                <div>
-                    <strong>Fecha: </strong>{{pedido.fecpedcl}}
-                    <strong>Total: </strong>{{pedido.totalped}}
+        </ion-list>
+        <ion-list>
+            <ion-item class="item-text-wrap row">
+                <div class="col"><strong>Id</strong></div>
+                <div class="col"><strong>Agente</strong></div>
+                <div class="col"><strong>Fecha</strong></div>
+                <div class="col"><strong>F.Pago</strong></div>
+                <div class="col text-right"><strong>Importe</strong></div>
+                <div class="col"><strong>Observaciones</strong></div>
+                <div class="col"></div>
+            </ion-item>
+            <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap row">
+                <div class="col">{{cobro.id}}</div>
+                <div class="col">{{cobro.nomagent}}</div>
+                <div class="col">{{cobro.fecha}}</div>
+                <div class="col">{{cobro.nomforpa}}</div>
+                <div class="col text-right">{{cobro.importe}}</div>
+                <div class="col">{{cobro.observa}}</div>
+                <div class="col text-center">
+                    <button class="button" ng-click="borrarLinea(cobro)">
+                        <i class="icon ion-trash-b"></i>
+                    </button>
                 </div>
             </ion-item>
         </ion-list>
