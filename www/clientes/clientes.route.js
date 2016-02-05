@@ -206,6 +206,17 @@
                         }
                     }
                 }
+            }, {
+                state: 'cli.edit',
+                config: {
+                    url: '/edit',
+                    views: {
+                        'menuContent': {
+                            templateUrl: 'clientes/cli-edit.html',
+                            controller: 'CliEditCtrl'
+                        }
+                    }
+                }
             }];
     }
 })();

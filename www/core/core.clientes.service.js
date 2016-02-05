@@ -8,6 +8,9 @@
     function ClientesFactory($http, LSFactory, ConfigFactory, Loader) {
 
         var ClientesAPI = {
+            putCliente: function (data) {
+                return $http.put(ConfigFactory.getConfig().urlApi + '/api/clientes', data);
+            },
             getClientes: function(agente, parnom) {
                 return $http.get(ConfigFactory.getConfig().urlApi + '/api/clientes/clientes-agente', {
                     params: {
@@ -16,6 +19,9 @@
                         "porNomComer": ConfigFactory.getConfig().porNomComer
                     }
                 })
+            },
+            getCliente: function(codclien) {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/clientes/' + codclien);
             },
             saveClienteLocal: function(cliente) {
                 LSFactory.set('cliente', cliente);
