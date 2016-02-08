@@ -27,7 +27,7 @@
         }
 
         $scope.verMapa = function() {
-            //$state.go('map');
+            $state.go('cli.map');
         };
 
         //$scope.load();

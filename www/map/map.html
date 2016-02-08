@@ -1,11 +1,11 @@
 <ion-view view-title="{{datos.cliente.nomclien}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/clientes">
+            <i class="icon ion-log-out"></i>
+        </a>
+    </ion-nav-buttons>
     <ion-header-bar class="bar-positive">
         <h1 class="title">Mapa de localización</h1>
-        <div class="buttons">
-            <button class="button" ng-click="returnToContacto()">
-                <i class="icon ion-log-out"></i>Contacto
-            </button>
-        </div>
     </ion-header-bar>
     <ion-content>
         <div id="map" data-tap-disabled="true"></div>

@@ -13,11 +13,15 @@
 
     function getStates() {
         return [{
-            state: 'map',
+            state: 'cli.map',
             config: {
                 url: '/map',
-                templateUrl: 'map/map.html',
-                controller: 'MapCtrl'
+                views: {
+                     'menuContent': {
+                        templateUrl: 'map/map.html',
+                        controller: 'MapCtrl'
+                    }
+                }
             }
         }];
     }
