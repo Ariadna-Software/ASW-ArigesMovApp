@@ -148,7 +148,7 @@
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Precio:</strong></span>
-                    <span> {{linped.precioar}}</span>
+                    <input type="number" name="precio" ng-model="linped.precioar" ng-change="cambiaPrecio()" required>
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Cantidad:</strong></span>

@@ -8,21 +8,31 @@
 
     function InicioCtrl($rootScope, $scope, $state, UserFactory, Loader) {
         $scope.hayErrores = false;
-        
+
         $scope.loginData = {
             login: "",
             password: ""
         };
 
+        $scope.version = "1.0.1";
+
         $scope.load = function() {
             $scope.isUser = UserFactory.isUser();
             $scope.user = UserFactory.getUser();
+            // controlar le versión con el plugin de cordova
+            try {
+                cordova.getAppVersion(function(version) {
+                    $scope.version = version;
+                });
+            } catch (e) {
+
+            }
         }
 
         // el login debe acceder a dos bases de datos distintas
         // de anhí las llamadas encadenadas
         $scope.login = function(form) {
-            if (!form.$valid){
+            if (!form.$valid) {
                 $scope.hayErrores = true;
                 return;
             }
