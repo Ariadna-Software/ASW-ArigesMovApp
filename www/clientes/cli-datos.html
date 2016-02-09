@@ -52,6 +52,14 @@
         </ion-list>
         <ion-list>
             <ion-item class="item-divider item-positive">
+                Facturación anual
+            </ion-item>
+            <ion-item>
+                <canvas id="bar" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item-divider item-positive">
                 Cobros pendientes
             </ion-item>
             <ion-item class="item-text-wrap">
@@ -80,11 +88,11 @@
                         {{cobro.fechavenci}}
                     </div>
                     <div class="col" ng-class="{assertive: cobro.vencido}">
-                       {{cobro.nomforpa}}
+                        {{cobro.nomforpa}}
                     </div>
                     <div class="col" ng-class="{assertive: cobro.vencido}">
                         {{cobro.numfact}}
-                    </div>                        
+                    </div>
                     <div class="col" ng-class="{assertive: cobro.vencido}">
                         {{cobro.fechafact}}
                     </div>
@@ -92,17 +100,6 @@
                         {{cobro.total}}
                     </div>
                 </div>
-            </ion-item>
-        </ion-list>
-        <ion-list>
-            <ion-item class="item-divider item-positive">
-                Facturación anual
-            </ion-item>
-            <ion-item>
-                <canvas id="bar" class="chart chart-bar" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
-            </ion-item>
-            <ion-item>
-                <canvas id="bar" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
             </ion-item>
         </ion-list>
     </ion-content>

@@ -14,6 +14,7 @@
 			/* Shared modules */
 			'ionic',
             'ngMessages',
+            'chart.js',
 			'agsMovApp.core',
 			'agsMovApp.layout',
 			/* Feature areas */

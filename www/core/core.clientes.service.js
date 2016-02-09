@@ -23,6 +23,9 @@
             getCliente: function(codclien) {
                 return $http.get(ConfigFactory.getConfig().urlApi + '/api/clientes/' + codclien);
             },
+            getVentaAnual: function(codclien) {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/clientes/vanual/' + codclien);
+            },
             saveClienteLocal: function(cliente) {
                 LSFactory.set('cliente', cliente);
             },
