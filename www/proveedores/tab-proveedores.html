@@ -24,7 +24,7 @@
                     <i class="icon ion-search"></i>
                 </button>
             </ion-item>
-            <ion-item ng-repeat="proveedor in datos.proveedores" class="item-text-wrap item-icon-right" href="#" ng-click="goProveedor(proveedor)">
+            <ion-item ng-repeat="proveedor in datos.proveedores" class="item-text-wrap item-icon-right"  ng-click="goProveedor(proveedor)">
                 <i class="icon ion-chevron-right"></i>
                 <h4> CIF: {{proveedor.nifprove}} </h4>
                 <p> {{proveedor.nomprove}}</p>

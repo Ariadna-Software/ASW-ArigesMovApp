@@ -4,9 +4,9 @@
     angular.module('agsMovApp.inicio')
         .controller('InicioCtrl', InicioCtrl);
 
-    InicioCtrl.$inject = ['$rootScope', '$scope', '$state', 'UserFactory', 'Loader'];
+    InicioCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPlatform', 'UserFactory', 'Loader'];
 
-    function InicioCtrl($rootScope, $scope, $state, UserFactory, Loader) {
+    function InicioCtrl($rootScope, $scope, $state, $ionicPlatform, UserFactory, Loader) {
         $scope.hayErrores = false;
 
         $scope.loginData = {
@@ -14,19 +14,26 @@
             password: ""
         };
 
-        $scope.version = "1.0.1";
+        $scope.version = "-.-.-";
+
+        $scope.$on('$ionicView.enter', function(e) {
+            $scope.load();
+        });
+
 
         $scope.load = function() {
             $scope.isUser = UserFactory.isUser();
             $scope.user = UserFactory.getUser();
             // controlar le versión con el plugin de cordova
-            try {
-                cordova.getAppVersion(function(version) {
-                    $scope.version = version;
-                });
-            } catch (e) {
+            $ionicPlatform.ready(function() {
+                try {
+                    cordova.getAppVersion(function(version) {
+                        $scope.version = version;
+                    });
+                } catch (e) {
 
-            }
+                }
+            });
         }
 
         // el login debe acceder a dos bases de datos distintas

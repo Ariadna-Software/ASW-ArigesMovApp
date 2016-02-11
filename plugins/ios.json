@@ -52,11 +52,11 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.agsMovApp"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.agsMovApp"
-        },
         "cordova-plugin-app-version": {
             "PACKAGE_NAME": "com.ionicframework.agsMovApp"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
         }
     },
     "dependent_plugins": {}

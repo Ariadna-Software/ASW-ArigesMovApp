@@ -6,7 +6,7 @@
         .module('agsMovApp.core')
         .run(appRun);
 
-    function appRun($ionicPlatform) {
+    function appRun($ionicPlatform,$state,$timeout) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -22,4 +22,3 @@
         });
     }
 })();
-
