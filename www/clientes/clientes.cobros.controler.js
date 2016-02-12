@@ -77,6 +77,10 @@
             Loader.showLoading('Obteniendo cobro...');
             CobrosFactory.getCobro(cobro.numserie, cobro.codfaccl, cobro.fecfaccl, cobro.numorden).
             success(function(data) {
+                if (!data){
+                    // nos salimos a datos que es de donde venimos
+                    $state.go('cli.datos');
+                }
                 Loader.hideLoading();
                 $scope.datos.cobroext = data;
                 // montar para visualización los importes como toca
