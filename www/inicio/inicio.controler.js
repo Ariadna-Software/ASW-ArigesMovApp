@@ -35,6 +35,11 @@
                 }
             });
             var config = ConfigFactory.getConfig();
+            if (!config){
+                // si no hay configuración nos vamos a confg
+                Loader.toggleLoadingWithMessage("Debe configurar la aplicación.");
+                $state.go('tab.config');
+            }
             var numImage = 0;
             if (config){
                 numImage = ConfigFactory.getConfig().numImage;
