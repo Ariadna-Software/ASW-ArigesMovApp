@@ -19,8 +19,17 @@
                     <strong>F. Factura:</strong> {{datos.cobro.fechafact}}
                 </div>
                 <div>
-                    <strong>Pendiente:</strong> {{datos.cobroext.impvenci + datos.cobroext.gastos - datos.cobroext.impcobro}}
-                    <strong>Cobrado:</strong> {{datos.cobroext.impcobro}}
+                    <strong>Importe:</strong> {{datos.cobroext.importef}}
+                    <strong>Gastos:</strong> {{datos.cobroext.gastosf}}
+                </div>
+                <div>
+                    <strong>Cobrado:</strong> {{datos.cobroext.cobradof}}
+                    <strong>Pendiente:</strong> {{datos.cobroext.vencidof}}
+                </div>
+                <hr/>
+                <div>
+                    <strong>CAPP:</strong> {{datos.cobroext.impcobrof}}
+                    <strong>CMOV:</strong> {{datos.cobroext.imporlinf}}
                 </div>
                 <button class="button" ng-click="verFactura(datos.cobro.numserie, datos.cobro.codfaccl, datos.cobro.fechafact)">
                     <i class="icon ion-clipboard"></i>

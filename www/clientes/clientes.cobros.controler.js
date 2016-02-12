@@ -17,8 +17,9 @@
             fpagos: []
         };
 
-        $scope.serachFPago = false;
-
+        
+        $scope.searchFPago = false;
+        
         $scope.cobro = {
             numserie: 0,
             codfaccl: 0,
@@ -66,6 +67,7 @@
                 observa: ""
             };
             $scope.enEdicionLinea = false;
+            $scope.searchFPago = false;
             // cargar el cobro extendido
             $scope.getCobroext($scope.datos.cobro);
         };
@@ -77,6 +79,13 @@
             success(function(data) {
                 Loader.hideLoading();
                 $scope.datos.cobroext = data;
+                // montar para visualización los importes como toca
+                $scope.datos.cobroext.importef = numeral(data.impvenci).format('0,0.00 $');
+                $scope.datos.cobroext.gastosf = numeral(data.gatos).format('0,0.00 $');
+                $scope.datos.cobroext.vencidof = numeral(data.impvenci + data.gastos - data.impcobro - data.imporlin).format('0,0.00 $');
+                $scope.datos.cobroext.cobradof = numeral(data.impcobro + data.imporlin).format('0,0.00 $');
+                $scope.datos.cobroext.impcobrof = numeral(data.impcobro).format('0,0.00 $');
+                $scope.datos.cobroext.imporlinf = numeral(data.imporlin).format('0,0.00 $');
                 // al estar guardado en la base de datos lo podemos obtener
                 CobrosFactory.getLinsCobro(cobro.numserie, cobro.codfaccl, cobro.fecfaccl, cobro.numorden).
                 success(function(data) {
@@ -123,6 +132,11 @@
                 codagent: null,
                 observa: ""
             };
+            $scope.datos.nomforpa = $scope.datos.cobroext.nomforpa;
+            $scope.datos.fecha = moment(new Date()).format('DD/MM/YYYY');
+            $scope.lincob.importe = $scope.datos.cobroext.impvenci + $scope.datos.cobroext.gastos - $scope.datos.cobroext.impcobro - $scope.datos.cobroext.imporlin
+            $scope.lincob.importe = roundToTwo($scope.lincob.importe);
+            $scope.lincob.codforpa = $scope.datos.cobroext.codforpa;
             $scope.enEdicionLinea = true;
         };
 

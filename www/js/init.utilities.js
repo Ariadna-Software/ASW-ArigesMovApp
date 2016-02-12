@@ -11,3 +11,8 @@ numeral.language('es', {
 
 // switch between languages
 numeral.language('es');
+
+// Own utilities
+var roundToTwo = function (num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
+};
