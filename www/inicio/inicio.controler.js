@@ -4,9 +4,9 @@
     angular.module('agsMovApp.inicio')
         .controller('InicioCtrl', InicioCtrl);
 
-    InicioCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPlatform', 'UserFactory', 'Loader'];
+    InicioCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPlatform', 'UserFactory', 'Loader', 'ImagesFactory', 'ConfigFactory'];
 
-    function InicioCtrl($rootScope, $scope, $state, $ionicPlatform, UserFactory, Loader) {
+    function InicioCtrl($rootScope, $scope, $state, $ionicPlatform, UserFactory, Loader, ImagesFactory, ConfigFactory) {
         $scope.hayErrores = false;
 
         $scope.loginData = {
@@ -34,6 +34,12 @@
 
                 }
             });
+            var config = ConfigFactory.getConfig();
+            var numImage = 0;
+            if (config){
+                numImage = ConfigFactory.getConfig().numImage;
+            }
+            $scope.imageUrl = ImagesFactory.getImage(numImage);
         }
 
         // el login debe acceder a dos bases de datos distintas
