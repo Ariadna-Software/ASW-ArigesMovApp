@@ -1,6 +1,6 @@
 <ion-view view-title="Pedido: {{datos.pedido.numpedcl}}">
     <ion-nav-buttons side="right">
-        <a class="button" href="#/tab/pedidos">
+        <a class="button" ng-click="returnPedido()">
             <i class="icon ion-log-out"></i> Pedidos
         </a>
     </ion-nav-buttons>
@@ -131,7 +131,7 @@
                 </ion-item>
                 <ion-item class="item-input">
                     <span class="input-label"><strong>Articulo:</strong></span>
-                    <input type="text" name="articulo" ng-model="linped.nomartic" ng-change="searchArticulos()" required>
+                    <input type="text" name="articulo" ng-model="linped.nomartic" ng-change="searchArticulos()" placeholder="Introduzca al menos tres caracteres..." required>
                 </ion-item>
                 <div ng-show="hayErrLin" ng-messages="linForm.articulo.$error" role="alert" ng-messages-multiple>
                     <div class="error" ng-message="required">

@@ -4,9 +4,9 @@
     angular.module('agsMovApp.pedidos')
         .controller('PedidosCtrl', PedidosCtrl);
 
-    PedidosCtrl.$inject = ['$rootScope', '$scope', '$state', 'PedidosFactory', 'UserFactory', 'Loader'];
+    PedidosCtrl.$inject = ['$rootScope', '$scope', '$state', 'PedidosFactory', 'UserFactory', 'Loader', 'NavFactory'];
 
-    function PedidosCtrl($rootScope, $scope, $state, PedidosFactory, UserFactory, Loader) {
+    function PedidosCtrl($rootScope, $scope, $state, PedidosFactory, UserFactory, Loader, NavFactory) {
 
         $scope.datos = {
             pedidos: []
@@ -67,6 +67,7 @@
         $scope.goPedido = function (pedido) {
             // guardar el proveedor en local
             PedidosFactory.savePedidoLocal(pedido);
+            NavFactory.setNavLocal("ped");  
             // ir a la vista adecuada
             $state.go('ped.detalle');
         };
@@ -74,6 +75,7 @@
         $scope.crearPedido = function (pedido){
             // hacemos el pedido local nulo
             PedidosFactory.savePedidoLocal(null);
+            NavFactory.setNavLocal("ped");            
             $state.go('ped.detalle');
         }
 

@@ -6,8 +6,11 @@
     </ion-nav-buttons>
     <ion-content class="padding">
         <ion-list>
-            <ion-item class="item-divider item-positive">
+            <ion-item class="item-positive item-button-right">
                 Pedidos
+                <button class="button button-positive" ng-click="crearPedido()">
+                    <i class="icon ion-plus"></i>
+                </button>
             </ion-item>
             <ion-item ng-repeat="pedido in datos.pedidos" class="item-text-wrap item-icon-right" ng-click="goPedido(pedido)">
                 <i class="icon ion-chevron-right"></i>

@@ -1,12 +1,12 @@
-(function() {
+(function () {
     'use strict';
 
     angular.module('agsMovApp.pedidos')
         .controller('PedidosDetalleCtrl', PedidosDetalleCtrl);
 
-    PedidosDetalleCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopup', 'PedidosFactory', 'UserFactory', 'ClientesFactory', 'ArticulosFactory', 'Loader'];
+    PedidosDetalleCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopup', 'PedidosFactory', 'UserFactory', 'ClientesFactory', 'ArticulosFactory', 'Loader', 'NavFactory'];
 
-    function PedidosDetalleCtrl($rootScope, $scope, $state, $ionicPopup, PedidosFactory, UserFactory, ClientesFactory, ArticulosFactory, Loader) {
+    function PedidosDetalleCtrl($rootScope, $scope, $state, $ionicPopup, PedidosFactory, UserFactory, ClientesFactory, ArticulosFactory, Loader, NavFactory) {
 
         $scope.datos = {
             pedido: null,
@@ -51,7 +51,7 @@
             bultosser: 0
         };
 
-        $scope.$on('$ionicView.enter', function(e) {
+        $scope.$on('$ionicView.enter', function (e) {
             if (!UserFactory.isUser()) {
                 Loader.toggleLoadingWithMessage("Debe entrar con un usuario");
                 $state.go('tab.inicio');
@@ -59,7 +59,7 @@
             $scope.load();
         });
 
-        $scope.load = function() {
+        $scope.load = function () {
             $scope.isUser = UserFactory.isUser();
             $scope.user = UserFactory.getUser();
             $scope.datos.pedido = PedidosFactory.getPedidoLocal();
@@ -80,6 +80,16 @@
                 // si no hay pedido es que es un alta
                 $scope.datos.parnomcli = "";
                 $scope.datos.feccab = "";
+                // si viene de las vistas de cliente ponemos los datos por defecto
+                var nav = NavFactory.getNavLocal();
+                if (nav && nav === "cliped") {
+                    // el cliente lo obtenemos del local
+                    var c = ClientesFactory.getClienteLocal();
+                    $scope.datos.cliente = c;
+                    $scope.datos.parnomcli = c.nomclien;
+                    $scope.datos.nomagent = c.nomagent;
+                }
+                $scope.datos.feccab = moment(new Date()).format('DD/MM/YYYY');
             }
             $scope.searchCliente = false;
             $scope.searchArticulo = false;
@@ -97,9 +107,10 @@
                 $scope.enEdicionLinea = false;
                 $scope.datos.nomagent = "";
             }
+
         }
 
-        $scope.searchClientes = function() {
+        $scope.searchClientes = function () {
             if (!$scope.datos.parnomcli) {
                 $scope.searchCliente = false;
                 return;
@@ -107,29 +118,29 @@
             Loader.showLoading('Buscando clientes..');
             $scope.searchCliente = true;
             ClientesFactory.getClientes($scope.user.codagent, $scope.datos.parnomcli).
-            success(function(data) {
-                Loader.hideLoading();
-                $scope.datos.clientes = data;
-            }).
-            error(function(err, statusCode) {
-                Loader.hideLoading();
-                $scope.searchCliente = false;
-                if (err) {
-                    var msg = err || err.message;
-                    Loader.toggleLoadingWithMessage(msg);
-                } else {
-                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                }
-            });
+                success(function (data) {
+                    Loader.hideLoading();
+                    $scope.datos.clientes = data;
+                }).
+                error(function (err, statusCode) {
+                    Loader.hideLoading();
+                    $scope.searchCliente = false;
+                    if (err) {
+                        var msg = err || err.message;
+                        Loader.toggleLoadingWithMessage(msg);
+                    } else {
+                        Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                    }
+                });
         };
-        $scope.selectCliente = function(cliente) {
+        $scope.selectCliente = function (cliente) {
             $scope.datos.parnomcli = cliente.nomclien;
             $scope.datos.cliente = cliente;
             $scope.datos.nomagent = cliente.nomagent;
             $scope.searchCliente = false;
         };
 
-        $scope.editarCabecera = function() {
+        $scope.editarCabecera = function () {
             // ponemos los datos del pedido en los campos de edición
             $scope.user.nomagent = $scope.datos.pedido.nomagent;
             $scope.datos.parnomcli = $scope.datos.pedido.nomclien;
@@ -137,7 +148,7 @@
             $scope.enEdicionCabecera = true;
         };
 
-        var cabDatosOk = function(form) {
+        var cabDatosOk = function (form) {
             var r = true;
             if (!$scope.datos.cliente) {
                 form.cliente.$error = {
@@ -154,7 +165,7 @@
             return r;
         };
 
-        $scope.guardarCabecera = function(form) {
+        $scope.guardarCabecera = function (form) {
             $scope.hayErrCab = true;
             if (!form.$valid) {
                 return;
@@ -195,21 +206,32 @@
             }
             Loader.showLoading('Guardando cabecera..');
             dbreturn.
-            success(function(data) {
-                Loader.hideLoading();
-                $scope.enEdicionCabecera = false;
-                // al estar guardado en la base de datos lo podemos obtener
-                PedidosFactory.getPedido(data.numpedcl).
-                success(function(data) {
-                    data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
-                    if (data[0].totalped) {
-                        data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
-                    }
-                    $scope.datos.pedido = data[0];
-                    PedidosFactory.savePedidoLocal(data[0]);
+                success(function (data) {
                     Loader.hideLoading();
+                    $scope.enEdicionCabecera = false;
+                    // al estar guardado en la base de datos lo podemos obtener
+                    PedidosFactory.getPedido(data.numpedcl).
+                        success(function (data) {
+                            data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
+                            if (data[0].totalped) {
+                                data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
+                            }
+                            $scope.datos.pedido = data[0];
+                            PedidosFactory.savePedidoLocal(data[0]);
+                            Loader.hideLoading();
+                        }).
+                        error(function (err, statusCode) {
+                            Loader.hideLoading();
+                            $scope.searchCliente = false;
+                            if (err) {
+                                var msg = err || err.message;
+                                Loader.toggleLoadingWithMessage(msg);
+                            } else {
+                                Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                            }
+                        });
                 }).
-                error(function(err, statusCode) {
+                error(function (err, statusCode) {
                     Loader.hideLoading();
                     $scope.searchCliente = false;
                     if (err) {
@@ -219,29 +241,18 @@
                         Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
                     }
                 });
-            }).
-            error(function(err, statusCode) {
-                Loader.hideLoading();
-                $scope.searchCliente = false;
-                if (err) {
-                    var msg = err || err.message;
-                    Loader.toggleLoadingWithMessage(msg);
-                } else {
-                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                }
-            });
         };
 
-        $scope.cancelarCabecera = function() {
+        $scope.cancelarCabecera = function () {
             if ($scope.datos.pedido) {
                 $scope.enEdicionCabecera = false;
             } else {
-                $state.go('tab.pedidos');
+                $scope.returnPedido();
             }
 
         };
 
-        $scope.searchArticulos = function() {
+        $scope.searchArticulos = function () {
             if (!$scope.linped.nomartic || $scope.linped.nomartic.length < 3) {
                 $scope.searchArticulo = false;
                 return;
@@ -252,22 +263,22 @@
                 $scope.datos.pedido.codtarif,
                 $scope.datos.pedido.codactiv,
                 $scope.linped.nomartic).
-            success(function(data) {
-                Loader.hideLoading();
-                $scope.datos.articulos = data;
-            }).
-            error(function(err, statusCode) {
-                Loader.hideLoading();
-                $scope.searchArticulo = false;
-                if (err) {
-                    var msg = err || err.message;
-                    Loader.toggleLoadingWithMessage(msg);
-                } else {
-                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                }
-            });
+                success(function (data) {
+                    Loader.hideLoading();
+                    $scope.datos.articulos = data;
+                }).
+                error(function (err, statusCode) {
+                    Loader.hideLoading();
+                    $scope.searchArticulo = false;
+                    if (err) {
+                        var msg = err || err.message;
+                        Loader.toggleLoadingWithMessage(msg);
+                    } else {
+                        Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                    }
+                });
         };
-        $scope.selectArticulo = function(articulo) {
+        $scope.selectArticulo = function (articulo) {
             $scope.linped = {
                 codartic: articulo.codartic,
                 codalmac: 1,
@@ -281,15 +292,15 @@
             $scope.searchArticulo = false;
         };
 
-        $scope.cambiaCantidad = function() {
+        $scope.cambiaCantidad = function () {
             $scope.linped.importel = round($scope.linped.cantidad * $scope.linped.precioar, 2);
         };
 
-        $scope.cambiaPrecio = function() {
+        $scope.cambiaPrecio = function () {
             $scope.linped.importel = round($scope.linped.cantidad * $scope.linped.precioar, 2);
         };
 
-        $scope.crearLinea = function() {
+        $scope.crearLinea = function () {
             $scope.linped = {
                 numpedcl: 0,
                 numlinea: 0,
@@ -308,7 +319,7 @@
             $scope.enEdicionLinea = true;
         };
 
-        var linDatosOk = function(form) {
+        var linDatosOk = function (form) {
             var r = true;
             if ($scope.linped.codartic == 0) {
                 form.articulo.$error = {
@@ -319,7 +330,7 @@
             return r;
         };
 
-        $scope.guardarLinea = function(form) {
+        $scope.guardarLinea = function (form) {
             $scope.hayErrLin = true;
             if (!form.$valid) {
                 return;
@@ -345,21 +356,32 @@
                 }
                 Loader.showLoading('Guardando linea...');
                 PedidosFactory.postLinPedido($scope.linped).
-                success(function(data) {
-                    Loader.hideLoading();
-                    $scope.enEdicionLinea = false;
-                    // al estar guardado en la base de datos lo podemos obtener
-                    PedidosFactory.getPedido(data.numpedcl).
-                    success(function(data) {
-                        data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
-                        if (data[0].totalped) {
-                            data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
-                        }
-                        $scope.datos.pedido = data[0];
-                        PedidosFactory.savePedidoLocal(data[0]);
+                    success(function (data) {
                         Loader.hideLoading();
+                        $scope.enEdicionLinea = false;
+                        // al estar guardado en la base de datos lo podemos obtener
+                        PedidosFactory.getPedido(data.numpedcl).
+                            success(function (data) {
+                                data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
+                                if (data[0].totalped) {
+                                    data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
+                                }
+                                $scope.datos.pedido = data[0];
+                                PedidosFactory.savePedidoLocal(data[0]);
+                                Loader.hideLoading();
+                            }).
+                            error(function (err, statusCode) {
+                                Loader.hideLoading();
+                                $scope.searchCliente = false;
+                                if (err) {
+                                    var msg = err || err.message;
+                                    Loader.toggleLoadingWithMessage(msg);
+                                } else {
+                                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                                }
+                            });
                     }).
-                    error(function(err, statusCode) {
+                    error(function (err, statusCode) {
                         Loader.hideLoading();
                         $scope.searchCliente = false;
                         if (err) {
@@ -369,33 +391,22 @@
                             Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
                         }
                     });
-                }).
-                error(function(err, statusCode) {
-                    Loader.hideLoading();
-                    $scope.searchCliente = false;
-                    if (err) {
-                        var msg = err || err.message;
-                        Loader.toggleLoadingWithMessage(msg);
-                    } else {
-                        Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                    }
-                });
             }
 
         };
 
-        $scope.cancelarLinea = function() {
+        $scope.cancelarLinea = function () {
             $scope.enEdicionLinea = false;
         };
 
         // A confirm dialog
-        $scope.borrarPedido = function() {
+        $scope.borrarPedido = function () {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Pedidos',
                 template: '¿Desea borra el pedido ' + $scope.datos.pedido.numpedcl + ' ?'
             });
 
-            confirmPopup.then(function(res) {
+            confirmPopup.then(function (res) {
                 if (res) {
                     $scope.cabped.numpedcl = $scope.datos.pedido.numpedcl;
                     $scope.cabped.codforpa = $scope.datos.pedido.codforpa;
@@ -404,51 +415,12 @@
                     $scope.cabped.fecpedcl = moment($scope.datos.feccab, "DD/MM/YYYY").format("YYYY-MM-DD");
                     $scope.cabped.codclien = $scope.datos.pedido.codclien;
                     PedidosFactory.deleteCabPedido($scope.cabped).
-                    success(function(data) {
-                        Loader.hideLoading();
-                        Loader.toggleLoadingWithMessage("Pedido borrado");
-                        $state.go('tab.pedidos');
-                    }).
-                    error(function(err, statusCode) {
-                        Loader.hideLoading();
-                        $scope.searchCliente = false;
-                        if (err) {
-                            var msg = err || err.message;
-                            Loader.toggleLoadingWithMessage(msg);
-                        } else {
-                            Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                        }
-                    });
-                } else {
-                    return;
-                }
-            });
-        };
-
-        // A confirm dialog
-        $scope.borrarLinea = function(linea) {
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Pedidos',
-                template: '¿Borrar la linea ' + linea.numlinea + ' del pedido ' + $scope.datos.pedido.numpedcl + ' ?'
-            });
-
-            confirmPopup.then(function(res) {
-                if (res) {
-                    PedidosFactory.deleteLinPedido($scope.datos.pedido.numpedcl, linea.numlinea).
-                    success(function(data) {
-                        Loader.hideLoading();
-                        Loader.toggleLoadingWithMessage("Linea borrada");
-                        PedidosFactory.getPedido($scope.datos.pedido.numpedcl).
-                        success(function(data) {
-                            data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
-                            if (data[0].totalped) {
-                                data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
-                            }
-                            PedidosFactory.savePedidoLocal(data[0]);
+                        success(function (data) {
                             Loader.hideLoading();
-                            $scope.load();
+                            Loader.toggleLoadingWithMessage("Pedido borrado");
+                            $scope.returnPedido();
                         }).
-                        error(function(err, statusCode) {
+                        error(function (err, statusCode) {
                             Loader.hideLoading();
                             $scope.searchCliente = false;
                             if (err) {
@@ -458,23 +430,79 @@
                                 Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
                             }
                         });
-                    }).
-                    error(function(err, statusCode) {
-                        Loader.hideLoading();
-                        if (err) {
-                            var msg = err || err.message;
-                            Loader.toggleLoadingWithMessage(msg);
-                        } else {
-                            Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                        }
-                    });
                 } else {
                     return;
                 }
             });
         };
 
+        // A confirm dialog
+        $scope.borrarLinea = function (linea) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Pedidos',
+                template: '¿Borrar la linea ' + linea.numlinea + ' del pedido ' + $scope.datos.pedido.numpedcl + ' ?'
+            });
 
+            confirmPopup.then(function (res) {
+                if (res) {
+                    PedidosFactory.deleteLinPedido($scope.datos.pedido.numpedcl, linea.numlinea).
+                        success(function (data) {
+                            Loader.hideLoading();
+                            Loader.toggleLoadingWithMessage("Linea borrada");
+                            PedidosFactory.getPedido($scope.datos.pedido.numpedcl).
+                                success(function (data) {
+                                    data[0].fecpedcl = moment(data[0].fecpedcl).format('DD/MM/YYYY');
+                                    if (data[0].totalped) {
+                                        data[0].totalped = numeral(data[0].totalped).format('0,0.00 $');
+                                    }
+                                    PedidosFactory.savePedidoLocal(data[0]);
+                                    Loader.hideLoading();
+                                    $scope.load();
+                                }).
+                                error(function (err, statusCode) {
+                                    Loader.hideLoading();
+                                    $scope.searchCliente = false;
+                                    if (err) {
+                                        var msg = err || err.message;
+                                        Loader.toggleLoadingWithMessage(msg);
+                                    } else {
+                                        Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                                    }
+                                });
+                        }).
+                        error(function (err, statusCode) {
+                            Loader.hideLoading();
+                            if (err) {
+                                var msg = err || err.message;
+                                Loader.toggleLoadingWithMessage(msg);
+                            } else {
+                                Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                            }
+                        });
+                } else {
+                    return;
+                }
+            });
+        };
+
+        $scope.returnPedido = function () {
+            var nav = NavFactory.getNavLocal();
+            if (!nav) {
+                $state.go('tab.pedidos');
+                return;
+            }
+            switch (nav) {
+                case "cliped":
+                    $state.go('cli.pedidos');
+                    break;
+                case "ped":
+                    $state.go('tab.pedidos');
+                    break;
+                default:
+                    $state.go('tab.pedidos');
+                    break;
+            }
+        }
 
         //$scope.load();
         function round(value, decimals) {
