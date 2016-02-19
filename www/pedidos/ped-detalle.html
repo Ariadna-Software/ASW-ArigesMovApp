@@ -94,25 +94,25 @@
                     <i class="icon ion-plus"></i>
                 </button>
             </ion-item>
-            <ion-item class="item-text-wrap row">
-                <div class="col"><strong>Linea</strong></div>
-                <div class="col"><strong>Articulo</strong></div>
-                <div class="col text-right"><strong>Cantidad</strong></div>
-                <div class="col text-right"><strong>Precio</strong></div>
-                <div class="col text-right"><strong>Dto1</strong></div>
-                <div class="col text-right"><strong>Dto2</strong></div>
-                <div class="col text-right"><strong>Importe</strong></div>
-                <div class="col"></div>
+            <ion-item class="item-text-wrap row header" style="font-size:small;">
+                <div class="col col-10"><strong>Linea</strong></div>
+                <div class="col col-30"><strong>Articulo</strong></div>
+                <div class="col col-10 text-right"><strong>Cantidad</strong></div>
+                <div class="col col-10 text-right"><strong>Precio</strong></div>
+                <div class="col col-10 text-right"><strong>Dto1</strong></div>
+                <div class="col col-10 text-right"><strong>Dto2</strong></div>
+                <div class="col col-10 text-right"><strong>Importe</strong></div>
+                <div class="col col-10"></div>
             </ion-item>
-            <ion-item ng-repeat="linea in datos.pedido.lineas" class="item-text-wrap row">
-                <div class="col">{{linea.numlinea}}</div>
-                <div class="col">{{linea.nomartic}}</div>
-                <div class="col text-right">{{linea.cantidad}}</div>
-                <div class="col text-right">{{linea.precioar}}</div>
-                <div class="col text-right">{{linea.dtoline1}}</div>
-                <div class="col text-right">{{linea.dtoline2}}</div>
-                <div class="col text-right">{{linea.importel}}</div>
-                <div class="col text-center">
+            <ion-item ng-repeat="linea in datos.pedido.lineas" class="item-text-wrap row"  style="font-size:small;">
+                <div class="col col-10">{{linea.numlinea}}</div>
+                <div class="col col-30">{{linea.nomartic}}</div>
+                <div class="col col-10 text-right">{{linea.cantidad}}</div>
+                <div class="col col-10 text-right">{{linea.precioar}}</div>
+                <div class="col col-10 text-right">{{linea.dtoline1}}</div>
+                <div class="col col-10 text-right">{{linea.dtoline2}}</div>
+                <div class="col col-10 text-right">{{linea.importel}}</div>
+                <div class="col col-10 text-center">
                     <button class="button" ng-click="borrarLinea(linea)">
                         <i class="icon ion-trash-b"></i>
                     </button>

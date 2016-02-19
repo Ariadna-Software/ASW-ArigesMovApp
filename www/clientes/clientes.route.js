@@ -39,7 +39,8 @@
                 config: {
                     url: '/cli',
                     abstract: true,
-                    templateUrl: 'clientes/cli-menu.html'
+                    templateUrl: 'clientes/cli-menu.html',
+                    controller: 'CliMenuCtrl'
                 }
             }, {
                 state: 'cli.contacto',

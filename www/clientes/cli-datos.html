@@ -25,10 +25,10 @@
             <ion-item class="item-text-wrap">
                 <div class="row">
                     <div class="col">
-                        <strong>Saldo pendiente: </strong> {{datos.indicadores.saldoPendiente}}
+                        <strong>S.Pendiente: </strong> {{datos.indicadores.saldoPendiente}}
                     </div>
                     <div class="col assertive">
-                        <strong>Saldo vencido: </strong> {{datos.indicadores.saldoVencido}}
+                        <strong>S.Vencido: </strong> {{datos.indicadores.saldoVencido}}
                     </div>
                 </div>
             </ion-item>
@@ -42,6 +42,16 @@
             <ion-item class="item-text-wrap">
                 <div class="row">
                     <div class="col">
+                        <strong>Agente: </strong> {{datos.cliente.nomagent}}
+                    </div>
+                    <div class="col">
+                        <strong>F.Pago: </strong> {{datos.cliente.nomforpa}}
+                    </div>
+                </div>
+            </ion-item>            
+            <ion-item class="item-text-wrap">
+                <div class="row">
+                    <div class="col">
                         <strong>Limite de crédito: </strong> {{datos.cliente.limiteCredito}}
                     </div>
                     <div class="col">
@@ -49,6 +59,12 @@
                     </div>
                 </div>
             </ion-item>
+            <ion-item class="item-text-wrap">
+                <div>
+                    <strong>Observaciones:</strong>
+                    <p>{{datos.cliente.observac}}</p>
+                </div>
+            </ion-item>            
         </ion-list>
         <ion-list>
             <ion-item class="item-divider item-positive">
@@ -62,44 +78,22 @@
             <ion-item class="item-divider item-positive">
                 Cobros pendientes
             </ion-item>
-            <ion-item class="item-text-wrap">
-                <div class="row">
-                    <div class="col">
-                        <strong>Fecha ven.:</strong>
+            <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap item-icon-left item-icon-right" ng-click="goCobro(cobro)">
+                <i class="icon ion-ios-circle-filled" ng-class="{assertive: cobro.vencido}"></i>
+                <div>
+                    <div>
+                        <strong>VEN: </strong> {{cobro.fechavenci}}
+                        <strong>TIP: </strong> {{cobro.nomforpa}}
                     </div>
-                    <div class="col">
-                        <strong>Tipo cobro:</strong>
+                    <div>
+                        <strong>FAC: </strong> {{cobro.numfact}}
+                        <strong>FEC: </strong> {{cobro.fechafact}}
                     </div>
-                    <div class="col">
-                        <strong>Factura:</strong>
-                    </div>
-                    <div class="col">
-                        <strong>F. Factura:</strong>
-                    </div>
-                    <div class="col text-right">
-                        <strong>Importe:</strong>
+                    <div>
+                        <strong>IMP: </strong> {{cobro.total}}
                     </div>
                 </div>
-            </ion-item>
-            <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap item-icon-right" ng-click="goCobro(cobro)">
                 <i class="icon ion-chevron-right"></i>
-                <div class="row">
-                    <div class="col" ng-class="{assertive: cobro.vencido}">
-                        {{cobro.fechavenci}}
-                    </div>
-                    <div class="col" ng-class="{assertive: cobro.vencido}">
-                        {{cobro.nomforpa}}
-                    </div>
-                    <div class="col" ng-class="{assertive: cobro.vencido}">
-                        {{cobro.numfact}}
-                    </div>
-                    <div class="col" ng-class="{assertive: cobro.vencido}">
-                        {{cobro.fechafact}}
-                    </div>
-                    <div class="col text-right" ng-class="{assertive: cobro.vencido}">
-                        {{cobro.total}}
-                    </div>
-                </div>
             </ion-item>
         </ion-list>
     </ion-content>

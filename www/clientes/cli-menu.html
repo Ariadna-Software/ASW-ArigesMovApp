@@ -22,7 +22,7 @@
                 <ion-item menu-close href="#/cli/contacto">
                     Contacto
                 </ion-item>
-                <ion-item menu-close href="#/cli/ofertas">
+                <ion-item ng-hide="config.numImage == 1" menu-close href="#/cli/ofertas">
                     Ofertas
                 </ion-item>
                 <ion-item menu-close href="#/cli/pedidos">
@@ -34,13 +34,13 @@
                 <ion-item menu-close href="#/cli/facturas">
                     Facturas
                 </ion-item>
-                <ion-item menu-close href="#/cli/precios">
+                <ion-item ng-hide="config.numImage == 1" menu-close href="#/cli/precios">
                     Precios
                 </ion-item>
-                <ion-item menu-close href="#/cli/preciosEspeciales">
+                <ion-item ng-hide="config.numImage == 1" menu-close href="#/cli/preciosEspeciales">
                     Precios especiales
                 </ion-item>
-                <ion-item menu-close href="#/cli/descuentos">
+                <ion-item ng-hide="config.numImage == 1" menu-close href="#/cli/descuentos">
                     Descuentos especiales
                 </ion-item>
             </ion-list>
@@ -48,5 +48,5 @@
     </ion-side-menu>
 </ion-side-menus>
 <ion-footer-bar class="bar-positive">
-  <h1 class="title">AriGesMovil (c) Ariadna Software</h1>
+  <h1 class="title">AriGES (c) Ariadna Software</h1>
 </ion-footer-bar>

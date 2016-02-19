@@ -13,7 +13,7 @@ navigation history that also transitions its views in and out.
         <ion-nav-view name="tab-clientes"></ion-nav-view>
     </ion-tab>
     <!-- Proveedores Tab -->
-    <ion-tab title="Proveedores" icon-off="ion-person-stalker" icon-on="ion-person-stalker" href="#/tab/proveedores">
+    <ion-tab ng-if="datos.sinAgente" title="Proveedores" icon-off="ion-person-stalker" icon-on="ion-person-stalker" href="#/tab/proveedores">
         <ion-nav-view name="tab-proveedores"></ion-nav-view>
     </ion-tab>
     <!-- Articulos Tab -->

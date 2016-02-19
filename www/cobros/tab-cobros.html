@@ -1,4 +1,4 @@
-<ion-view view-title="AriGesMov - (c) Ariadna Software S.L.">
+<ion-view view-title="AriGES - (c) Ariadna Software S.L.">
     <ion-nav-bar class="bar-stable">
         <ion-nav-back-button>
         </ion-nav-back-button>
@@ -10,19 +10,19 @@
             </div>
         </ion-list>
         <ion-list>
-            <ion-item class="item-text-wrap row">
+            <ion-item class="item-text-wrap row header" style="font-size:small;">
                 <div class="col"><strong>Id</strong></div>
                 <div class="col"><strong>Agente</strong></div>
-                <div class="col"><strong>Fecha</strong></div>
+                <div class="col text-center"><strong>Fecha</strong></div>
                 <div class="col"><strong>F.Pago</strong></div>
                 <div class="col text-right"><strong>Importe</strong></div>
                 <div class="col"><strong>Observaciones</strong></div>
                 <div class="col"></div>
             </ion-item>
-            <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap row">
+            <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap row" style="font-size:small;">
                 <div class="col">{{cobro.id}}</div>
                 <div class="col">{{cobro.nomagent}}</div>
-                <div class="col">{{cobro.fecha}}</div>
+                <div class="col text-center">{{cobro.fecha}}</div>
                 <div class="col">{{cobro.nomforpa}}</div>
                 <div class="col text-right">{{cobro.importe}}</div>
                 <div class="col">{{cobro.observa}}</div>
