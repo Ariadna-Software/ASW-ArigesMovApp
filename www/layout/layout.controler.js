@@ -12,11 +12,6 @@
         };
         
         $scope.$on('$ionicView.enter', function(e) {
-            if (!UserFactory.isUser()) {
-                $scope.datos.sinAgente = true;
-                Loader.toggleLoadingWithMessage("Debe entrar con un usuario");
-                $state.go('tab.inicio');
-            }
             $scope.load();
         });
         
