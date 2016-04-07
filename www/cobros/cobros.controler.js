@@ -4,9 +4,9 @@
     angular.module('agsMovApp.cobros')
         .controller('CobrosCtrl', CobrosCtrl);
 
-    CobrosCtrl.$inject = ['$rootScope', '$scope', '$state','$ionicPopup','CobrosFactory', 'UserFactory', 'Loader'];
+    CobrosCtrl.$inject = ['$rootScope', '$scope', '$state','$ionicPopup','CobrosFactory', 'UserFactory', 'Loader', 'ClientesFactory'];
 
-    function CobrosCtrl($rootScope, $scope, $state, $ionicPopup, CobrosFactory, UserFactory, Loader) {
+    function CobrosCtrl($rootScope, $scope, $state, $ionicPopup, CobrosFactory, UserFactory, Loader, ClientesFactory) {
 
         $scope.datos = {
             cobros: []
@@ -84,6 +84,11 @@
                 }
             });
         };
+
+        $scope.goCobro = function(cobro) {
+            ClientesFactory.saveCobroLocal(cobro);
+            $state.go('cli.cobro');
+        }
 
         //$scope.load();
     }

@@ -3,7 +3,7 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
-        <ion-nav-buttons side="right">
+    <ion-nav-buttons side="right">
         <button class="button" ng-click="crearPedido()">
             <i class="icon ion-plus"></i>
         </button>
@@ -13,14 +13,14 @@
             <div class="item item-divider item-positive">
                 Pedidos
             </div>
-            <ion-item ng-repeat="pedido in datos.pedidos" class="item-text-wrap item-icon-right"  ng-click="goPedido(pedido)">
+            <ion-item ng-repeat="pedido in datos.pedidos" class="item-text-wrap item-icon-right" ng-click="goPedido(pedido)">
                 <i class="icon ion-chevron-right"></i>
                 <div>
                     <strong>Numero: </strong>{{pedido.numpedcl}}
+                    <strong>Agente: </strong>{{pedido.nomagent}}
                 </div>
                 <div>
-                    <strong>Agente: </strong>{{pedido.nomagent}}
-                    <strong>Cliente: </strong>{{pedido.nomclien}}
+                    <strong>Cliente: </strong>{{pedido.nomclien}} ({{pedido.nomcomer}})
                 </div>
                 <div>
                     <strong>Fecha: </strong>{{pedido.fecpedcl}}

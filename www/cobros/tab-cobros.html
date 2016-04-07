@@ -10,23 +10,26 @@
             </div>
         </ion-list>
         <ion-list>
-            <ion-item class="item-text-wrap row header" style="font-size:small;">
-                <div class="col"><strong>Id</strong></div>
-                <div class="col"><strong>Agente</strong></div>
-                <div class="col text-center"><strong>Fecha</strong></div>
-                <div class="col"><strong>F.Pago</strong></div>
-                <div class="col text-right"><strong>Importe</strong></div>
-                <div class="col"><strong>Observaciones</strong></div>
-                <div class="col"></div>
-            </ion-item>
-            <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap row" style="font-size:small;">
-                <div class="col">{{cobro.id}}</div>
-                <div class="col">{{cobro.nomagent}}</div>
-                <div class="col text-center">{{cobro.fecha}}</div>
-                <div class="col">{{cobro.nomforpa}}</div>
-                <div class="col text-right">{{cobro.importe}}</div>
-                <div class="col">{{cobro.observa}}</div>
-                <div class="col text-center">
+            <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap">
+                <div>
+                    <strong>Id: </strong> {{cobro.id}}
+                    <strong> Agente:</strong> {{cobro.nomagent}}
+                </div>
+                <div>
+                    <strong> Cliente:</strong> {{cobro.nommacta}} ({{cobro.razosoci}})
+                </div>
+                <div>
+                    <strong>Fecha:</strong> {{cobro.fecha}}
+                    <strong>Factura:</strong> {{cobro.codfaccl}}
+                </div>
+                <div>
+                    <strong>F.Pago: </strong> {{cobro.nomforpa}}
+                    <strong>Importe: </strong> {{cobro.importe}}
+                </div>
+                <div>
+                    <strong>Observaciones: </strong> {{cobro.observa}}
+                </div>
+                <div class="text-right">
                     <button class="button" ng-click="borrarLinea(cobro)">
                         <i class="icon ion-trash-b"></i>
                     </button>
