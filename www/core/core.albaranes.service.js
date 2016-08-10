@@ -8,48 +8,22 @@
     function AlbaranesFactory($http, LSFactory, ConfigFactory, Loader) {
 
         var AlbaranesAPI = {
-            getCobro: function (numserie, codfaccl, fecfaccl, numorden) {
-                return $http.get(ConfigFactory.getConfig().urlApi + '/api/cobros/cobro', {
-                    params: {
-                        "numserie": numserie,
-                        "codfaccl": codfaccl,
-                        "fecfaccl": fecfaccl,
-                        "numorden": numorden
-                    }
-                })
+            getAlbaranes: function () {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/albaranes');
             },
-            getLinsCobro: function (numserie, codfaccl, fecfaccl, numorden) {
-                return $http.get(ConfigFactory.getConfig().urlApi + '/api/cobros/lineas', {
-                    params: {
-                        "numserie": numserie,
-                        "codfaccl": codfaccl,
-                        "fecfaccl": fecfaccl,
-                        "numorden": numorden
-                    }
-                })
+            getAlbaranesPendientes: function () {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/albaranes/pendientes');
             },
-            getLinsCobroAgente: function (codagent) {
-                return $http.get(ConfigFactory.getConfig().urlApi + '/api/cobros/lineas/agente', {
-                    params: {
-                        "codagent": codagent
-                    }
-                })
-            },            
-            postLinCobro: function (data) {
-                return $http.post(ConfigFactory.getConfig().urlApi + '/api/cobros/lineas', data);
+            getAlbaranesServidos: function () {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/albaranes/enviados');
             },
-            deleteLinCobro: function (numserie, codfaccl, fecfaccl, numorden, id, importe) {
-                return $http.delete(ConfigFactory.getConfig().urlApi + '/api/cobros/lineas', {
-                    params: {
-                        "numserie": numserie,
-                        "codfaccl": codfaccl,
-                        "fecfaccl": fecfaccl,
-                        "numorden": numorden,
-                        "id": id,
-                        "importe": importe
-                    }
-                });
+            postServirAlbaran: function (data) {
+                return $http.post(ConfigFactory.getConfig().urlApi + '/api/albaranes/enviar', data);
             },
+            postDesServirAlbaran: function (data) {
+                return $http.post(ConfigFactory.getConfig().urlApi + '/api/albaranes/desenviar', data);
+            },
+
             saveCobroextLocal: function (cobroext) {
                 LSFactory.set('cobroext', cobroext);
             },

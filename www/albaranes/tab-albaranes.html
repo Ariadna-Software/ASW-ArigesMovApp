@@ -6,33 +6,44 @@
     <ion-content class="padding">
         <ion-list>
             <div class="item item-divider item-positive">
-                Albaranes pendientes
+                Albaranes pendientes /servidos
+                <div class="text-right">
+                    <button class="button" ng-click="albaranesPendientes()">
+                        <i class="icon ion-android-radio-button-off"></i>
+                    </button>
+                    <button class="button" ng-click="albaranesServidos()">
+                        <i class="icon ion-android-radio-button-on"></i>
+                    </button>
+                </div>
             </div>
         </ion-list>
         <ion-list>
-            <ion-item ng-repeat="cobro in datos.cobros" class="item-text-wrap">
+            <ion-item ng-repeat="albaran in datos.albaranes" class="item-text-wrap">
                 <div>
-                    <strong>Id: </strong> {{cobro.id}}
-                    <strong> Agente:</strong> {{cobro.nomagent}}
+                    <strong>Numero: </strong> {{albaran.numalbar}}
+                    <strong> Fecha Alb:</strong> {{albaran.fechaalb}}
                 </div>
                 <div>
-                    <strong> Cliente:</strong> {{cobro.nommacta}} ({{cobro.razosoci}})
+                    <strong> Fecha Entrega:</strong> {{albaran.fecenvio}}
                 </div>
                 <div>
-                    <strong>Fecha:</strong> {{cobro.fecha}}
-                    <strong>Factura:</strong> {{cobro.codfaccl}}
+                    <strong> Cliente:</strong> {{albaran.nomclien}}
                 </div>
                 <div>
-                    <strong>F.Pago: </strong> {{cobro.nomforpa}}
-                    <strong>Importe: </strong> {{cobro.importe}}
-                </div>
-                <div>
-                    <strong>Observaciones: </strong> {{cobro.observa}}
+                    <strong>Observaciones: </strong> 
+                    <p>{{albaran.observa01}}</p>
+                    <p>{{albaran.observa02}}</p>
+                    <p>{{albaran.observa03}}</p>
+                    <p>{{albaran.observa04}}</p>
+                    <p>{{albaran.observa05}}</p>
                 </div>
                 <div class="text-right">
-                    <button class="button" ng-click="borrarLinea(cobro)">
-                        <i class="icon ion-trash-b"></i>
+                    <button class="button" ng-click="servirAlbaran(albaran)">
+                        <i class="icon ion-android-checkmark-circle"></i>
                     </button>
+                    <button class="button" ng-click="desServirAlbaran(albaran)">
+                        <i class="icon ion-android-radio-button-off"></i>
+                    </button>                    
                 </div>
             </ion-item>
         </ion-list>
