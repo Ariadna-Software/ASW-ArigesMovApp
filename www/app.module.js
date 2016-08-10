@@ -25,6 +25,7 @@
             'agsMovApp.proveedores',
             'agsMovApp.articulos',
             'agsMovApp.pedidos',
-            'agsMovApp.cobros'
+            'agsMovApp.cobros',
+			'agsMovApp.albaranes'
 		]);
 })();
