@@ -8,29 +8,30 @@
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
+            "PACKAGE_NAME": "com.ariadnasw.arigesmov"
         },
         "cordova-plugin-app-version": {
-            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
+            "PACKAGE_NAME": "com.ariadnasw.arigesmov"
         },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
+            "PACKAGE_NAME": "com.ariadnasw.arigesmov"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
+            "PACKAGE_NAME": "com.ariadnasw.arigesmov"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
+            "PACKAGE_NAME": "com.ariadnasw.arigesmov"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.ionictabsagsMovAppangularstyle429395"
+            "PACKAGE_NAME": "com.ariadnasw.arigesmov"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ariadnasw.arigesmov"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ariadnasw.arigesmov"
+        }
+    }
 }
