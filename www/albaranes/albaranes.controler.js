@@ -131,45 +131,9 @@
                 });
         }
 
-        // A confirm dialog
-        $scope.borrarLinea = function (linea) {
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Pagos',
-                template: '¿Borrar la linea ' + linea.id + ' del cobro ' + linea.fecha + ' ?'
-            });
-
-            confirmPopup.then(function (res) {
-                if (res) {
-                    AlbaranesFactory.deleteLinCobro(linea.numserie, linea.codfaccl, moment(linea.fecfaccl).format('YYYY-MM-DD'), linea.numorden, linea.id, linea.importe).
-                        success(function (data) {
-                            Loader.hideLoading();
-                            Loader.toggleLoadingWithMessage("Linea borrada");
-                            var cobro = {
-                                numserie: linea.numserie,
-                                codfaccl: linea.codfaccl,
-                                fecfaccl: linea.fecfaccl,
-                                numorden: linea.numorden
-                            };
-                            $scope.searchCobros();
-                        }).
-                        error(function (err, statusCode) {
-                            Loader.hideLoading();
-                            if (err) {
-                                var msg = err || err.message;
-                                Loader.toggleLoadingWithMessage(msg);
-                            } else {
-                                Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
-                            }
-                        });
-                } else {
-                    return;
-                }
-            });
-        };
-
-        $scope.goCobro = function (cobro) {
-            ClientesFactory.saveCobroLocal(cobro);
-            $state.go('cli.cobro');
+        $scope.goAlbaran = function (albaran) {
+            AlbaranesFactory.saveAlbaranLocal(albaran);
+            $state.go('alb.detalle');
         }
 
         //$scope.load();

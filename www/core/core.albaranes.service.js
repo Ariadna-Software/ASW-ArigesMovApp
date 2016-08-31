@@ -17,18 +17,25 @@
             getAlbaranesServidos: function () {
                 return $http.get(ConfigFactory.getConfig().urlApi + '/api/albaranes/enviados');
             },
+            getAlbaranDetalle: function (codtipom, numalbar) {
+                return $http.get(ConfigFactory.getConfig().urlApi + '/api/albaranes/detalle', {
+                    params: {
+                        "codtipom": codtipom,
+                        "numalbar": numalbar
+                    }
+                })
+            },
             postServirAlbaran: function (data) {
                 return $http.post(ConfigFactory.getConfig().urlApi + '/api/albaranes/enviar', data);
             },
             postDesServirAlbaran: function (data) {
                 return $http.post(ConfigFactory.getConfig().urlApi + '/api/albaranes/desenviar', data);
             },
-
-            saveCobroextLocal: function (cobroext) {
-                LSFactory.set('cobroext', cobroext);
+            saveAlbaranLocal: function(albaran) {
+                LSFactory.set('albaran', albaran);
             },
-            getCobroextLocal: function () {
-                return LSFactory.get('cobroext');
+            getAlbaranLocal: function() {
+                return LSFactory.get('albaran');
             }
         };
 

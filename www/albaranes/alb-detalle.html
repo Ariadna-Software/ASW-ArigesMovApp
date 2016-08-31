@@ -1,0 +1,32 @@
+<ion-view view-title="{{datos.cliente.nomclien}}">
+    <ion-nav-buttons side="right">
+        <a class="button" href="#/tab/albaranes">
+            <i class="icon ion-log-out"></i> Albaranes
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-divider item-positive">
+                Albarán {{datos.albaran.numalbar}}
+            </ion-item>
+            <ion-item class="item-text-wrap row">
+                <div class="col"><strong>Linea</strong></div>
+                <div class="col"><strong>Articulo</strong></div>
+                <div class="col text-right"><strong>Cantidad</strong></div>
+                <div class="col text-right"><strong>Precio</strong></div>
+                <div class="col text-right"><strong>Dto1</strong></div>
+                <div class="col text-right"><strong>Dto2</strong></div>
+                <div class="col text-right"><strong>Importe</strong></div>
+            </ion-item>
+            <ion-item ng-repeat="linea in datos.albaran.lineas" class="item-text-wrap row">
+                <div class="col">{{linea.numlinea}}</div>
+                <div class="col">{{linea.nomartic}}</div>
+                <div class="col text-right">{{linea.cantidad}}</div>
+                <div class="col text-right">{{linea.precioar}}</div>
+                <div class="col text-right">{{linea.dtoline1}}</div>
+                <div class="col text-right">{{linea.dtoline2}}</div>
+                <div class="col text-right">{{linea.importel}}</div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

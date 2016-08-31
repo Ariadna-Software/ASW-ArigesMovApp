@@ -23,6 +23,17 @@
                     }
                 }
             }
-        }];
+        }, {
+                state: 'albdetalle',
+                config: {
+                    url: '/albdetalle',
+                    views: {
+                        'menuContent': {
+                            templateUrl: 'albaranes/alb-detalle.html',
+                            controller: 'AlbaranesDetalleCtrl'
+                        }
+                    }
+                }
+            }];
     }
 })();

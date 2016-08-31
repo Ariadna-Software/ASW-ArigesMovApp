@@ -18,7 +18,7 @@
             </div>
         </ion-list>
         <ion-list>
-            <ion-item ng-repeat="albaran in datos.albaranes" class="item-text-wrap">
+            <ion-item ng-repeat="albaran in datos.albaranes" class="item-text-wrap" ng-click="goAlbaran(albaran)">
                 <div>
                     <strong>Numero: </strong> {{albaran.numalbar}}
                     <strong> Fecha Alb:</strong> {{albaran.fechaalb}}
