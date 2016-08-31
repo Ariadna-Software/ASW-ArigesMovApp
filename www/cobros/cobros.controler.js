@@ -34,7 +34,7 @@
                 Loader.hideLoading();
                 // formateo de los datos numéricos
                 for (var i = 0; i < data.length; i++) {
-                    data[i].fecha = moment(data[i]).format('DD/MM/YYYY');
+                    data[i].fecha = moment(data[i].fecha).format('DD/MM/YYYY');
                 }
                 $scope.datos.cobros = data;
             }).
