@@ -2,11 +2,11 @@
     'use strict';
 
     angular.module('agsMovApp.albaranes')
-        .controller('AlbaranesDetalleCtrl', AlbaranesCtrl);
+        .controller('AlbaranesDetalleCtrl', AlbaranesDetalleCtrl);
 
-    AlbaranesCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopup', 'AlbaranesFactory', 'UserFactory', 'Loader', 'ClientesFactory'];
+    AlbaranesDetalleCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopup', 'AlbaranesFactory', 'UserFactory', 'Loader', 'ClientesFactory'];
 
-    function AlbaranesCtrl($rootScope, $scope, $state, $ionicPopup, AlbaranesFactory, UserFactory, Loader, ClientesFactory) {
+    function AlbaranesDetalleCtrl($rootScope, $scope, $state, $ionicPopup, AlbaranesFactory, UserFactory, Loader, ClientesFactory) {
 
         $scope.datos = {
             albaranes: []
@@ -30,7 +30,7 @@
             Loader.showLoading('Buscando albaran..');
             $scope.searchFamilia = true;
             var albaran = AlbaranesFactory.getAlbaranLocal();
-            AlbaranesFactory.getAlbaranDetalle(albaran.codtipom, albaral.numalbar).
+            AlbaranesFactory.getAlbaranDetalle(albaran.codtipom, albaran.numalbar).
                 success(function (data) {
                     Loader.hideLoading();
                     // formateo de los datos numéricos

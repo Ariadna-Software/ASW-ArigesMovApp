@@ -24,9 +24,16 @@
                 }
             }
         }, {
-                state: 'albdetalle',
+                state: 'alb',
                 config: {
-                    url: '/albdetalle',
+                    url: '/alb',
+                    abstract: true,
+                    templateUrl: 'albaranes/alb-menu.html'
+                }
+            }, {
+                state: 'alb.detalle',
+                config: {
+                    url: '/detalle',
                     views: {
                         'menuContent': {
                             templateUrl: 'albaranes/alb-detalle.html',
